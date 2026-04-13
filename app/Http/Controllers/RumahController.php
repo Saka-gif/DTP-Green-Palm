@@ -67,4 +67,11 @@ public function show($id)
     $rumah = Rumah::find($id);
     return view('rumah.detail', compact('rumah'));
 }
+
+
+public function home()
+{
+    $rumah = Rumah::all(); // ambil semua data dari database
+    return view('index', compact('rumah'));
+}
 }

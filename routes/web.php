@@ -14,3 +14,4 @@ Route::get('/rumah/edit/{id}', [RumahController::class, 'edit']);
 Route::post('/rumah/update/{id}', [RumahController::class, 'update']);
 Route::delete('/rumah/delete/{id}', [RumahController::class, 'destroy']);
 Route::get('/rumah/{id}', [App\Http\Controllers\RumahController::class, 'show']);
+Route::get('/', [RumahController::class, 'home']);  

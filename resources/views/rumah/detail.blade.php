@@ -23,7 +23,7 @@
     @endif
 
     <p class="text-gray-700 mb-2">
-        <strong>Harga:</strong> Rp {{ $rumah->harga }}
+        <strong>Harga:</strong> Rp {{ number_format($rumah->harga, 0, ',', '.') }}
     </p>
 
     <p class="text-gray-700 mb-2">
@@ -33,6 +33,15 @@
     <p class="text-gray-700 mb-4">
         <strong>Deskripsi:</strong> {{ $rumah->deskripsi }}
     </p>
+
+    <p class="text-gray-700">
+        <strong>Status:</strong> {{ $rumah->status }}
+    </p>
+
+      <a href="https://wa.me/6281234567890?text=Saya tertarik dengan rumah {{ $rumah->nama_rumah }}" 
+   target="_blank">
+   Hubungi via WhatsApp
+</a>
 
 </div>
 
