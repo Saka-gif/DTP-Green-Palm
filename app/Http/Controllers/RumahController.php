@@ -20,7 +20,25 @@ class RumahController extends Controller
 
 public function store(Request $request)
 {
-    Rumah::create($request->all());
+    $request->validate([
+        'nama_rumah' => 'required',
+        'harga' => 'required|numeric',
+        'lokasi' => 'required',
+        'status' => 'required',
+        'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+    ]);
+
+    $data = $request->all(); 
+
+    if ($request->hasFile('foto')) {
+        $file = $request->file('foto');
+        $filename = time().'.'.$file->getClientOriginalExtension();
+        $file->move(public_path('images'), $filename);
+        $data['foto'] = $filename; // ⬅️ simpan ke $data
+    }
+
+    Rumah::create($data); 
+
     return redirect('/rumah');
 }
 

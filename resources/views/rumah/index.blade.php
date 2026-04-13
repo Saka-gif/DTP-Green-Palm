@@ -18,14 +18,19 @@
 
     <!-- Card List -->
     <div class="grid grid-cols-2 gap-6">
-        @foreach($data as $r)
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-            
-            <h2 class="text-lg font-bold text-green-700">
-                {{ $r->nama_rumah }}
-            </h2>
 
-            <p class="text-gray-600">Rp {{ $r->harga }}</p>
+        @foreach($data as $r)
+    <div class="bg-white p-4 rounded-xl shadow">
+
+        @if($r->foto)
+            <img src="{{ asset('images/'.$r->foto) }}">
+        @endif
+        <div class="mt-2">
+
+        <h2>{{ $r->nama_rumah }}</h2>
+        <p>{{ $r->harga }}</p>
+
+    </div>
 
             <div class="mt-4 flex gap-2">
                 <a href="/rumah/edit/{{ $r->id }}" 
