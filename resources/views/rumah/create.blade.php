@@ -4,6 +4,8 @@
 <div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
 
 <h1 class="text-xl font-bold text-green-800 mb-4">Tambah Rumah</h1>
+<form method="POST" enctype="multipart/form-data">
+<input type="file" name="foto">
 
 <form action="/rumah/store" method="POST">
     @csrf
