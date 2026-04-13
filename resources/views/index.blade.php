@@ -39,7 +39,7 @@
       .grid{display:grid;gap:18px}
       .clusters{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
       .card{background:white;border-radius:14px;padding:16px;box-shadow:0 8px 24px rgba(16,24,40,0.04)}
-      .card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+      .card img{width: 100%;height: 260px;;object-fit:cover;border-radius:10px}
       .muted{color:var(--muted)}
 
       /* Facilities */
@@ -141,38 +141,28 @@
         <section id="clusters">
           <div class="section-head">
             <h3 style="margin:0;font-family:Montserrat">Featured Clusters</h3>
-            <div class="muted">Select a cluster to view floor plans, pricing, and availability.</div>
           </div>
+          <div class="muted" style="margin-top:6px">Select a cluster to view floor plans, pricing, and availability.</div>
 
           <div class="grid clusters" style="margin-top:16px">
             <!-- Card 1 -->
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1618005198919-2c14a9d5f3f6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b" alt="Cluster A">
-              <h4 style="margin:12px 0 6px">Palm Grove</h4>
-              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 850M</strong></div>
-              <p class="muted" style="font-size:14px">Family-sized homes with private gardens and modern finishes.</p>
+              <img src="{{ asset('foto/type_39.jpeg') }}" alt="gambar tidak tersedia"/>             
+              <h4 style="margin:12px 0 6px">Type 39</h4>
+              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 300JT</strong></div>
+              <p class="muted" style="font-size:14px">Luxury villas with panoramic views and private pools.</p>
               <div style="margin-top:8px"><a href="#" class="btn" style="background:transparent;color:var(--green);font-weight:700">View Details</a></div>
             </div>
 
             <!-- Card 2 -->
             <div class="card">
-              <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7b" alt="Cluster B">
-              <h4 style="margin:12px 0 6px">Lagoon Villas</h4>
-              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 1.2B</strong></div>
-              <p class="muted" style="font-size:14px">Luxury villas with panoramic views and private pools.</p>
-              <div style="margin-top:8px"><a href="#" class="btn" style="background:transparent;color:var(--green);font-weight:700">View Details</a></div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=8c" alt="Cluster C">
-              <h4 style="margin:12px 0 6px">Citrus Court</h4>
-              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 630M</strong></div>
+              <img src="{{ asset('foto/type_45.jpeg') }}" alt="gambar tidak tersedia"/>
+              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 400JT</strong></div>
               <p class="muted" style="font-size:14px">Smart layouts, community parks, and easy financing options.</p>
               <div style="margin-top:8px"><a href="#" class="btn" style="background:transparent;color:var(--green);font-weight:700">View Details</a></div>
             </div>
 
-            <!-- Card 4 -->
+            <!-- Card  -->
             <div class="card">
               <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9d" alt="Cluster D">
               <h4 style="margin:12px 0 6px">Orchid Row</h4>
