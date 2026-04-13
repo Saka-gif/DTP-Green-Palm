@@ -61,4 +61,10 @@ public function destroy($id)
     $rumah->delete();
     return redirect('/rumah');
 }
+
+public function show($id)
+{
+    $rumah = Rumah::find($id);
+    return view('rumah.detail', compact('rumah'));
+}
 }
