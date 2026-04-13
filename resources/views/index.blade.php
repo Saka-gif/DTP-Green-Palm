@@ -69,7 +69,7 @@
     <div class="container">
       <header>
         <div class="brand">
-          <div class="logo">GP</div>
+          <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="gambar tidak tersedia" style="width:36px;height:36px;object-fit:cover;border-radius:8px"/>
           <div>
             <div style="font-weight:700;color:var(--dark-green)">Green Palm</div>
             <div class="muted" style="font-size:12px">Eco-living • Modern • Trusted</div>
@@ -86,9 +86,9 @@
       <main>
         <div class="hero">
           <div class="hero-card">
-            <span class="kicker">Premium Residences</span>
-            <h1>Green Palm – Find Your Dream Home Today</h1>
-            <p class="lead">Comfortable, strategic, and modern living in a green environment. Family-friendly neighborhoods with modern amenities and sustainable design.</p>
+            <span class="kicker">Hunian Nyaman & Modern</span>
+            <h1>Green Palm – Cari rumah impian anda disini</h1>
+            <p class="lead">Hunian nyaman, strategis, dan modern di lingkungan yang hijau. Lingkungan ramah keluarga dengan fasilitas modern dan desain berkelanjutan. 🌿</p>
             <div class="hero-ctas">
               <a href="#clusters" class="btn primary">View Clusters</a>
               <!-- Replace whatsapp number in href with your number -->
@@ -108,7 +108,7 @@
           </div>
 
           <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1560185127-6ed9a4c6e8fe?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1f4a6a6a1b3c5f9d2e1b" alt="Green Palm housing"/>
+            <img src="{{ asset('gambar/home_page_green_palm.jpeg') }}" alt="gambar tidak tersedia"/>
           </div>
         </div>
 
@@ -214,12 +214,11 @@
         <section id="promo">
           <div class="promo">
             <div>
-              <h4 style="margin:0">Limited-Time Offer</h4>
-              <div class="muted">Book now and get exclusive discounts plus free legal fees for selected units.</div>
+              <h4 style="margin:0">Penawaran Spesial</h4>
+              <div class="muted">Download brosur sekarang untuk melihat detail perumahan, harga, dan promo eksklusif.</div>
             </div>
             <div style="display:flex;gap:12px;align-items:center">
-              <a href="https://wa.me/6281234567890?text=I%27m%20interested%20in%20the%20special%20offer" class="btn primary">Get Brochure</a>
-              <a href="#contact" class="muted">Terms apply</a>
+            <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" class="btn primary" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 0px;min-width:180px;border-radius:12px;" target="_blank" download="brosur_green_palm.pdf">Get Brochure</a>
             </div>
           </div>
         </section>
