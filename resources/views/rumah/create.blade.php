@@ -1,3 +1,7 @@
+<head>
+    <link rel="icon" type="image/x-icon" href="{{ asset('gambar/logo_green_palm.jpeg') }}">
+</head>
+
 <body class="bg-green-50">
     <script src="https://cdn.tailwindcss.com"></script>
 
