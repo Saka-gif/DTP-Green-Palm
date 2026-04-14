@@ -43,10 +43,12 @@
             </a>
 
             <form action="/rumah/delete/{{ $r->id }}" method="POST">
-                @csrf
-                <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">
-                    Hapus
-                </button>
+    @csrf
+    @method('DELETE')
+
+    <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">
+        Hapus
+    </button>
             </form>
         </div>
 
