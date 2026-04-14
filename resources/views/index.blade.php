@@ -61,7 +61,20 @@
       footer{margin-top:48px;padding:30px 0;border-top:1px solid rgba(16,24,40,0.04)}
 
       /* Floating WhatsApp */
-      .whatsapp-fixed{position:fixed;right:18px;bottom:18px;background:linear-gradient(135deg,var(--green),#27a16d);color:white;padding:14px;border-radius:999px;box-shadow:0 12px 30px rgba(16,24,40,0.12);display:flex;gap:12px;align-items:center;text-decoration:none}
+      .whatsapp-fixed{position:fixed;right:18px;bottom:18px;background:linear-gradient(135deg,var(--green),#27a16d);color:white;padding:14px;border-radius:999px;box-shadow:0 12px 30px rgba(16,24,40,0.12);display:flex;gap:12px;align-items:center;text-decoration:none;transition:all 0.3s ease;z-index:999}
+      .whatsapp-fixed:hover{transform:scale(1.1);box-shadow:0 16px 40px rgba(30,139,87,0.3)}
+
+      /* Footer Interactive Styles */
+      .footer-link{transition:all 0.3s ease;display:inline-block}
+      .footer-link:hover{color:var(--green) !important;transform:translateX(4px)}
+      .footer-link.is-active{color:var(--green) !important;transform:translateX(6px);font-weight:700}
+      .footer-link:focus,
+      .footer-link:focus-visible,
+      .footer-link:active{outline:none;box-shadow:none}
+      .social-icon{transition:all 0.3s ease !important;transform:translateY(0)}
+      .social-icon:hover{background:var(--green) !important;transform:translateY(-4px);box-shadow:0 8px 20px rgba(30,139,87,0.3) !important}
+      .social-icon.is-active{background:var(--green) !important;box-shadow:0 8px 20px rgba(30,139,87,0.35) !important;transform:translateY(-2px)}
+      .footer-title{transition:color 0.3s ease}
 
       @media (max-width:980px){.hero{grid-template-columns:1fr;}.hero-image{order:-1}.hero-card{order:2}.hero{gap:18px}}
 
@@ -198,15 +211,12 @@
         <section id="facilities">
           <div class="section-head">
             <h3 style="margin:0;font-family:Montserrat">Facilities</h3>
-            <div class="muted">Everything you and your family need — nearby and on-site.</div>
           </div>
+          <div class="muted" style="margin-top:6px">Everything you and your family need — nearby and on-site.</div>
           <div class="facilities" style="margin-top:16px">
             <div class="fac card"><div style="font-size:20px;color:var(--green)">🔒</div><div><strong>24-hour Security</strong><div class="muted">Gated community & CCTV</div></div></div>
-            <div class="fac card"><div style="font-size:20px;color:var(--green)">🎥</div><div><strong>CCTV</strong><div class="muted">Surveillance across common areas</div></div></div>
-            <div class="fac card"><div style="font-size:20px;color:var(--green)">🛝</div><div><strong>Playground</strong><div class="muted">Safe play areas for kids</div></div></div>
             <div class="fac card"><div style="font-size:20px;color:var(--green)">🕌</div><div><strong>Mosque</strong><div class="muted">Community prayer facility</div></div></div>
             <div class="fac card"><div style="font-size:20px;color:var(--green)">🌳</div><div><strong>Green Park</strong><div class="muted">Open spaces & landscaping</div></div></div>
-            <div class="fac card"><div style="font-size:20px;color:var(--green)">🏃‍♂️</div><div><strong>Jogging Track</strong><div class="muted">Healthy lifestyle amenities</div></div></div>
           </div>
         </section>
 
@@ -274,22 +284,69 @@
 
       </main>
 
-      <footer>
-        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
-          <div style="min-width:220px">
-            <div style="font-weight:700;color:var(--dark-green)">Green Palm</div>
-            <div class="muted">Jl. Green Palm Residence No.10 • Jakarta • Indonesia</div>
-            <div class="muted" style="margin-top:8px">Phone: +62 812-3456-7890</div>
+      <footer style="background:#1a2f2a;color:#e0e7ff;padding:40px 0;width:100vw;margin-left:calc(-50vw + 50%);position:relative">
+        <div class="container" style="padding-left:28px;padding-right:28px">
+          <!-- Footer Content -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;margin-bottom:40px">
+            <!-- Brand & Description -->
+            <div>
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
+                <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="Green Palm" style="width:40px;height:40px;object-fit:cover;border-radius:8px"/>
+                <div>
+                  <div style="font-weight:700;font-size:18px">Green Palm</div>
+                </div>
+              </div>
+              <p style="color:#9ca3af;margin:0 0 18px;line-height:1.6">Your trusted partner in finding the perfect tropical modern home. Quality living spaces designed for families.</p>
+              <!-- Social Links -->
+              <div style="display:flex;gap:12px">
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">f</a>
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">📷</a>
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">𝕏</a>
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">in</a>
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+              <h4 style="margin:0 0 18px;font-weight:700;font-size:16px">Quick Links</h4>
+              <ul style="margin:0;padding:0;list-style:none">
+                <li style="margin-bottom:10px"><a href="#" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Home</a></li>
+                <li style="margin-bottom:10px"><a href="#about" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">About Us</a></li>
+                <li style="margin-bottom:10px"><a href="#clusters" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Clusters</a></li>
+                <li style="margin-bottom:10px"><a href="#facilities" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Facilities</a></li>
+                <li style="margin-bottom:10px"><a href="#location" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Location</a></li>
+                <li style="margin-bottom:10px"><a href="#contact" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Contact</a></li>
+              </ul>
+            </div>
+
+            <!-- Contact Us -->
+            <div>
+              <h4 style="margin:0 0 18px;font-weight:700;font-size:16px">Contact Us</h4>
+              <div style="margin-bottom:16px">
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <span style="color:var(--green);margin-top:2px">📍</span>
+                  <div>
+                    <div style="color:#d1d5db">Jl. Raya Utama No. 123</div>
+                    <div style="color:#d1d5db">Kota Sejahtera, 12345</div>
+                    <div style="color:#d1d5db">Indonesia</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-bottom:10px;display:flex;gap:10px;align-items:center">
+                <span style="color:var(--green)">📞</span>
+                <a href="tel:+6281234567890" class="footer-link" style="color:#d1d5db;text-decoration:none">+62 812-3456-7890</a>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center">
+                <span style="color:var(--green)">✉️</span>
+                <a href="mailto:info@greenpalm.com" class="footer-link" style="color:#d1d5db;text-decoration:none">info@greenpalm.com</a>
+              </div>
+            </div>
           </div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <div>
-              <div style="font-weight:700">Quick Links</div>
-              <div class="muted">Clusters • Facilities • Location • Contact</div>
-            </div>
-            <div>
-              <div style="font-weight:700">Follow Us</div>
-              <div class="muted">Instagram • Facebook • LinkedIn</div>
-            </div>
+
+          <!-- Footer Bottom -->
+          <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+            <div style="color:#9ca3af;font-size:14px">© 2026 Green Palm. All rights reserved.</div>
+            <div style="color:#9ca3af;font-size:14px">Developed with <span style="color:var(--green)">❤️</span> for Modern Tropical Living</div>
           </div>
         </div>
       </footer>
@@ -302,6 +359,7 @@
     </a>
 
     <script>
+
       // Smooth scroll for internal links
       document.querySelectorAll('a[href^="#"]').forEach(a=>{
         a.addEventListener('click', e=>{
@@ -371,6 +429,185 @@
         w.addEventListener('mouseenter', ()=>w.classList.remove('pulse'));
         w.addEventListener('mouseleave', ()=>w.classList.add('pulse'));
       })();
+
+      // ===== Footer Interactive Effects =====
+      document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. Smooth scroll untuk footer links
+        const footerLinks = document.querySelectorAll('footer a[href^="#"]');
+        const quickLinks = document.querySelectorAll('footer .footer-link[href^="#"]');
+        footerLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+
+            if (href === '#') {
+              e.preventDefault();
+            }
+
+            if (this.classList.contains('footer-link')) {
+              quickLinks.forEach(item => item.classList.remove('is-active'));
+              this.classList.add('is-active');
+            }
+
+            if (href !== '#') {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }
+          });
+        });
+
+        // 2. Add hover class ke footer links (tanpa ripple agar tidak muncul blok)
+        const allFooterLinks = document.querySelectorAll('footer a');
+        allFooterLinks.forEach(link => {
+          link.addEventListener('mouseenter', function() {
+            this.classList.add('footer-link');
+          });
+        });
+
+        // 3. Social media icons animation
+        const socialIcons = document.querySelectorAll('footer .social-icon');
+        socialIcons.forEach((icon, index) => {
+          icon.addEventListener('mouseenter', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+              this.style.animation = `bounce 0.6s ease`;
+            }, 10);
+            createRipple(this, {
+              clientX: this.getBoundingClientRect().left + this.offsetWidth / 2,
+              clientY: this.getBoundingClientRect().top + this.offsetHeight / 2
+            });
+          });
+
+          icon.addEventListener('click', function(e) {
+            if (this.getAttribute('href') === '#') {
+              e.preventDefault();
+            }
+            socialIcons.forEach(item => item.classList.remove('is-active'));
+            this.classList.add('is-active');
+          });
+
+          // Stagger animation on page load
+          icon.style.opacity = '0';
+          icon.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s forwards`;
+        });
+
+        // 4. Footer sections fade-in animation
+        const footerSections = document.querySelectorAll('footer > .container > div:first-child > div');
+        footerSections.forEach((section, index) => {
+          section.style.opacity = '0';
+          section.style.animation = `fadeInUp 0.6s ease ${index * 0.2}s forwards`;
+        });
+
+        function createRipple(element, event) {
+          const ripple = document.createElement('span');
+          const rect = element.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = event.clientX - rect.left - size / 2 + 'px';
+          ripple.style.top = event.clientY - rect.top - size / 2 + 'px';
+          ripple.classList.add('ripple');
+          element.appendChild(ripple);
+          
+          // Remove ripple after animation
+          ripple.addEventListener('animationend', () => ripple.remove());
+        }
+
+        // 5. Footer contact info copy to clipboard
+        const contactInfo = document.querySelectorAll('footer a[href^="tel:"], footer a[href^="mailto:"]');
+        contactInfo.forEach(info => {
+          info.addEventListener('click', function(e) {
+            const text = this.textContent.trim();
+            e.preventDefault();
+            
+            // Show feedback
+            const originalText = this.textContent;
+            this.textContent = 'Copied!';
+            setTimeout(() => {
+              this.textContent = originalText;
+            }, 2000);
+
+            // Copy ke clipboard
+            navigator.clipboard.writeText(text).catch(err => console.log('Copy error:', err));
+            
+            // Actual navigation
+            setTimeout(() => {
+              window.location.href = this.href;
+            }, 500);
+          });
+        });
+
+        // 6. WhatsApp button pulse animation
+        const whatsappBtn = document.querySelector('.whatsapp-fixed');
+        if (whatsappBtn) {
+          whatsappBtn.style.animation = 'pulse 2s infinite';
+        }
+      });
+
+      // CSS Animations
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            box-shadow: 0 12px 30px rgba(30,139,87,0.12);
+          }
+          50% {
+            box-shadow: 0 12px 40px rgba(30,139,87,0.3);
+          }
+        }
+
+        @keyframes ripple {
+          from {
+            opacity: 1;
+            transform: scale(0);
+          }
+          to {
+            opacity: 0;
+            transform: scale(4);
+          }
+        }
+
+        .ripple {
+          position: absolute;
+          background: rgba(30, 139, 87, 0.6);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: ripple 0.6s ease-out;
+          pointer-events: none;
+        }
+
+        footer .social-icon {
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Mobile optimize */
+        @media (max-width: 768px) {
+          footer > .container > div:first-child {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
     </script>
 
   </body>
