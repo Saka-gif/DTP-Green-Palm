@@ -20,38 +20,40 @@
     <!-- Card List -->
     <div class="grid grid-cols-2 gap-6">
 
-        @foreach($data as $r)
+@foreach($data as $r)
     <div class="bg-white p-4 rounded-xl shadow">
 
         @if($r->foto)
-            <img src="{{ asset('images/'.$r->foto) }}">
+            <img src="{{ asset('images/'.$r->foto) }}" 
+                 class="w-full h-40 object-cover rounded">
         @endif
-        <div class="mt-2">
 
-        <h2>{{ $r->nama_rumah }}</h2>
-        <p>{{ $r->harga }}</p>
+        <a href="/rumah/{{ $r->id }}">
+            <h2 class="text-lg font-bold text-green-700 mt-2">
+                {{ $r->nama_rumah }}
+            </h2>
+        </a>
 
-    </div>
+        <p class="text-gray-600">Rp {{ $r->harga }}</p>
 
-            <div class="mt-4 flex gap-2">
-                <a href="/rumah/edit/{{ $r->id }}" 
-                   class="bg-yellow-400 px-3 py-1 rounded text-sm">
-                   Edit
-                </a>
+        <!-- tombol tetap di dalam card -->
+        <div class="mt-4 flex gap-2">
+            <a href="/rumah/edit/{{ $r->id }}" 
+               class="bg-yellow-400 px-3 py-1 rounded text-sm">
+               Edit
+            </a>
 
-                <form action="/rumah/delete/{{ $r->id }}" method="POST">
-                    @csrf
-                    <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">
-                        Hapus
-                    </button>
-                </form>
-            </div>
+            <form action="/rumah/delete/{{ $r->id }}" method="POST">
+    @csrf
+    @method('DELETE')
 
+    <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">
+        Hapus
+    </button>
+            </form>
         </div>
-        @endforeach
+
     </div>
+@endforeach
 
 </div>
-
-</body>
-</html>

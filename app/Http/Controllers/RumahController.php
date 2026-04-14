@@ -50,8 +50,36 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
-    $rumah = Rumah::find($id);
-    $rumah->update($request->all());
+    $data = Rumah::find($id);
+
+    $request->validate([
+        'nama_rumah' => 'required',
+        'harga' => 'required|numeric',
+        'lokasi' => 'required',
+        'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
+    ]);
+
+    // CEK kalau upload foto baru
+    if ($request->hasFile('foto')) {
+
+        // hapus foto lama (opsional tapi bagus)
+        if ($data->foto && file_exists(public_path('images/'.$data->foto))) {
+            unlink(public_path('images/'.$data->foto));
+        }
+
+        $file = $request->file('foto');
+        $filename = time().'.'.$file->getClientOriginalExtension();
+        $file->move(public_path('images'), $filename);
+
+        $data->foto = $filename;
+    }
+
+    // update data lain
+    $data->nama_rumah = $request->nama_rumah;
+    $data->harga = $request->harga;
+    $data->lokasi = $request->lokasi;
+    $data->save();
+
     return redirect('/rumah');
 }
 
@@ -60,5 +88,25 @@ public function destroy($id)
     $rumah = Rumah::find($id);
     $rumah->delete();
     return redirect('/rumah');
+}
+
+public function show($id)
+{
+    $rumah = Rumah::find($id);
+    return view('rumah.detail', compact('rumah'));
+}
+
+
+public function home()
+{
+    $rumah = Rumah::all(); // ambil semua data dari database
+    return view('index', compact('rumah'));
+}
+
+
+public function detailUser($id)
+{
+    $rumah = Rumah::find($id);
+    return view('detail', compact('rumah'));
 }
 }

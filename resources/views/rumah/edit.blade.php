@@ -11,8 +11,12 @@
 
 <h1 class="text-xl font-bold text-green-800 mb-4">Edit Rumah</h1>
 
-<form action="/rumah/update/{{ $rumah->id }}" method="POST">
+    <form action="/rumah/update/{{ $rumah->id }}" method="POST" enctype="multipart/form-data">
     @csrf
+
+    <input type="file" name="foto" class="mb-3">
+
+    <img src="{{ asset('images/'.$rumah->foto) }}" width="100" class="mb-3">
 
     <input type="text" name="nama_rumah" value="{{ $rumah->nama_rumah }}"
         class="w-full border p-2 mb-3 rounded">
