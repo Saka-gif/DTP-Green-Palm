@@ -35,6 +35,9 @@ public function store(Request $request)
         $filename = time().'.'.$file->getClientOriginalExtension();
         $file->move(public_path('images'), $filename);
         $data['foto'] = $filename; // ⬅️ simpan ke $data
+        Rumah::create($data);
+        
+        return redirect('/rumah')->with('success', 'Data berhasil ditambahkan');
     }
 
     Rumah::create($data); 

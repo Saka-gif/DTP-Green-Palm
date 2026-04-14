@@ -195,6 +195,18 @@
         {{ $r->deskripsi }}
       </p>
 
+<span style="
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:12px;
+  color:white;
+  background: {{ $r->status == 'Tersedia' ? '#22c55e' : '#ef4444' }};
+">
+  {{ $r->status }}
+</span>
+
       <div style="margin-top:8px">
         <a href="/detail/{{ $r->id }}" 
            class="btn" 

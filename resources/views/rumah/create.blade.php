@@ -23,8 +23,14 @@
     <input type="text" name="lokasi" placeholder="Lokasi"
         class="w-full border p-2 mb-3 rounded">
 
-    <input type="text" name="status" placeholder="Status"
-        class="w-full border p-2 mb-3 rounded"  >
+   <select name="status" class="w-full border p-2 mb-3 rounded">
+    <option value="Tersedia" {{ $rumah->status == 'Tersedia' ? 'selected' : '' }}>
+        Tersedia
+    </option>
+    <option value="Sold" {{ $rumah->status == 'Sold' ? 'selected' : '' }}>
+        Sold
+    </option>
+</select>
 
     <input type="text" name="deskripsi" placeholder="Deskripsi"
         class="w-full border p-2 mb-3 rounded">
