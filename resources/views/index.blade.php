@@ -150,41 +150,47 @@
           </div>
         </section>
 
-        <!-- Clusters -->
-        <section id="clusters">
-          <div class="section-head">
-            <h3 style="margin:0;font-family:Montserrat">Featured Clusters</h3>
-          </div>
-          <div class="muted" style="margin-top:6px">Select a cluster to view floor plans, pricing, and availability.</div>
+      <!-- Clusters -->
+<!-- Clusters -->
+<section id="clusters">
+  <div class="section-head">
+    <h3 style="margin:0;font-family:Montserrat">Featured Clusters</h3>
+  </div>
 
-          <div class="grid clusters" style="margin-top:16px">
-            <!-- Card 1 -->
-            <div class="card">
-              <img src="{{ asset('foto/type_39.jpeg') }}" alt="gambar tidak tersedia"/>             
-              <h4 style="margin:12px 0 6px">Type 39</h4>
-              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 300JT</strong></div>
-              <p class="muted" style="font-size:14px">Luxury villas with panoramic views and private pools.</p>
-              <div style="margin-top:8px"><a href="#" class="btn" style="background:transparent;color:var(--green);font-weight:700">View Details</a></div>
-            </div>
+  <div class="muted" style="margin-top:6px">
+    Pilihan rumah
+  </div>
 
-            <!-- Card 2 -->
-            <div class="card">
-              <img src="{{ asset('foto/type_45.jpeg') }}" alt="gambar tidak tersedia"/>
-              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 400JT</strong></div>
-              <p class="muted" style="font-size:14px">Smart layouts, community parks, and easy financing options.</p>
-              <div style="margin-top:8px"><a href="#" class="btn" style="background:transparent;color:var(--green);font-weight:700">View Details</a></div>
-            </div>
+  <div class="grid clusters" style="margin-top:16px">
+    @foreach($rumah as $r)
+    <div class="card">
+      @if($r->foto)
+        <img src="{{ asset('images/'.$r->foto) }}" alt="gambar" style="width:100%;height:260px;object-fit:cover;border-radius:10px">
+      @endif
 
-            <!-- Card  -->
-            <div class="card">
-              <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9d" alt="Cluster D">
-              <h4 style="margin:12px 0 6px">Orchid Row</h4>
-              <div class="muted">Starting from <strong style="color:var(--dark-green)">IDR 720M</strong></div>
-              <p class="muted" style="font-size:14px">Compact modern homes with shared green courtyards.</p>
-              <div style="margin-top:8px"><a href="#" class="btn" style="background:transparent;color:var(--green);font-weight:700">View Details</a></div>
-            </div>
-          </div>
-        </section>
+      <h4 style="margin:12px 0 6px">
+        {{ $r->nama_rumah }}
+      </h4>
+
+      <div class="muted">
+        Rp {{ number_format($r->harga,0,',','.') }}
+      </div>
+
+      <p class="muted" style="font-size:14px">
+        {{ $r->deskripsi }}
+      </p>
+
+      <div style="margin-top:8px">
+        <a href="/detail/{{ $r->id }}" 
+           class="btn" 
+           style="background:transparent;color:var(--green);font-weight:700">
+           View Details
+        </a>
+      </div>
+    </div>
+    @endforeach
+  </div>
+</section>
 
         <!-- Facilities -->
         <section id="facilities">
