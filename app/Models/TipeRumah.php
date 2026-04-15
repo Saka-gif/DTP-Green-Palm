@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class TipeRumah extends Model
 {
     protected $table = 'tipe_rumah';
+    protected $fillable = ['nama_tipe', 'deskripsi'];
 }

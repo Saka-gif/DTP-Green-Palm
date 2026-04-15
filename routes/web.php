@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RumahController;
+use App\Http\Controllers\TipeRumahController;
 
 Route::get('/', function () {
     return view('index');
@@ -18,3 +19,6 @@ Route::get('/rumah/{id}', [App\Http\Controllers\RumahController::class, 'show'])
 Route::get('/detail/{id}', [RumahController::class, 'show']);
 Route::get('/', [RumahController::class, 'home']);  
 Route::get('/detail/{id}', [RumahController::class, 'detailUser']);
+Route::get('/tiperumah', [TipeRumahController::class, 'index']);
+Route::get('/tiperumah/create', [TipeRumahController::class, 'create']);
+Route::post('/tiperumah', [TipeRumahController::class, 'store']);
