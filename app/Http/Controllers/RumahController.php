@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rumah;
+use App\Models\TipeRumah;
 
 class RumahController extends Controller
 {
@@ -16,17 +17,29 @@ class RumahController extends Controller
     public function create()
 {
     return view('rumah.create');
+    $tipe = TipeRumah::all();
+    return view('rumah.create', compact('tipe'));
 }
 
 public function store(Request $request)
 {
     $request->validate([
-        'nama_rumah' => 'required',
-        'harga' => 'required|numeric',
-        'lokasi' => 'required',
-        'status' => 'required',
-        'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
-    ]);
+    'nama_rumah' => 'required',
+    'harga' => 'required|numeric',
+    'lokasi' => 'required',
+    'status' => 'required',
+    'tipe_id' => 'required|exists:tipe_rumah,id',
+
+    'deskripsi' => 'nullable',
+    'luas_tanah' => 'nullable',
+    'luas_bangunan' => 'nullable',
+    'kamar_tidur' => 'nullable|numeric',
+    'kamar_mandi' => 'nullable|numeric',
+    'lantai' => 'nullable|numeric',
+    'carport' => 'nullable|numeric',
+
+    'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+]);
 
     $data = $request->all(); 
 
@@ -55,12 +68,22 @@ public function update(Request $request, $id)
 {
     $data = Rumah::find($id);
 
-    $request->validate([
-        'nama_rumah' => 'required',
-        'harga' => 'required|numeric',
-        'lokasi' => 'required',
-        'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
-    ]);
+   $request->validate([
+    'nama_rumah' => 'required',
+    'harga' => 'required|numeric',
+    'lokasi' => 'required',
+    'status' => 'required',
+
+    'deskripsi' => 'nullable',
+    'luas_tanah' => 'nullable',
+    'luas_bangunan' => 'nullable',
+    'kamar_tidur' => 'nullable|numeric',
+    'kamar_mandi' => 'nullable|numeric',
+    'lantai' => 'nullable|numeric',
+    'carport' => 'nullable|numeric',
+
+    'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+]);
 
     // CEK kalau upload foto baru
     if ($request->hasFile('foto')) {

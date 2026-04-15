@@ -30,8 +30,25 @@
     <input type="text" name="status" value="{{ $rumah->status }}"
         class="w-full border p-2 mb-3 rounded">
 
-    <textarea name="deskripsi"
-        class="w-full border p-2 mb-3 rounded">{{ $rumah->deskripsi }}</textarea>
+    <textarea name="deskripsi" class="w-full border p-2 mb-3 rounded">
+    {{ $rumah->deskripsi }}
+</textarea>
+
+<input type="text" name="luas_tanah" value="{{ $rumah->luas_tanah }}"
+    class="w-full border p-2 mb-3 rounded">
+
+<input type="text" name="luas_bangunan" value="{{ $rumah->luas_bangunan }}"
+    class="w-full border p-2 mb-3 rounded">
+
+<input type="number" name="kamar_tidur" value="{{ $rumah->kamar_tidur }}"
+    class="w-full border p-2 mb-3 rounded">
+
+<input type="number" name="kamar_mandi" value="{{ $rumah->kamar_mandi }}"
+    class="w-full border p-2 mb-3 rounded">
+
+<input type="number" name="lantai" value="{{ $rumah->lantai }}"
+    class="w-full border p-2 mb-3 rounded">
+
 
     <button class="bg-green-600 text-white px-4 py-2 rounded">
         Update
