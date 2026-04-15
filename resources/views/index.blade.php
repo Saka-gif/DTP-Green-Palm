@@ -338,19 +338,19 @@
                 <div style="display:flex;gap:10px;align-items:flex-start">
                   <span style="color:var(--green);margin-top:2px">📍</span>
                   <div>
-                    <div style="color:#d1d5db">Jl. Raya Utama No. 123</div>
-                    <div style="color:#d1d5db">Kota Sejahtera, 12345</div>
+                    <div style="color:#d1d5db">Krajan, Sepande</div>
+                    <div style="color:#d1d5db">Kota Sidoarjo, 61271</div>
                     <div style="color:#d1d5db">Indonesia</div>
                   </div>
                 </div>
               </div>
               <div style="margin-bottom:10px;display:flex;gap:10px;align-items:center">
                 <span style="color:var(--green)">📞</span>
-                <a href="tel:+6281234567890" class="footer-link" style="color:#d1d5db;text-decoration:none">+62 812-3456-7890</a>
+                <a href="tel:+62 822-2727-4058" class="footer-link" style="color:#d1d5db;text-decoration:none">+62 822-2727-4058</a>
               </div>
               <div style="display:flex;gap:10px;align-items:center">
                 <span style="color:var(--green)">✉️</span>
-                <a href="mailto:info@greenpalm.com" class="footer-link" style="color:#d1d5db;text-decoration:none">info@greenpalm.com</a>
+                <a href="mailto:WWW.yusitatitin@gmail.com" class="footer-link" style="color:#d1d5db;text-decoration:none">WWW.yusitatitin@gmail.com</a>
               </div>
             </div>
           </div>
@@ -358,7 +358,7 @@
           <!-- Footer Bottom -->
           <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
             <div style="color:#9ca3af;font-size:14px">© 2026 Green Palm. All rights reserved.</div>
-            <div style="color:#9ca3af;font-size:14px">Developed with <span style="color:var(--green)">❤️</span> for Modern Tropical Living</div>
+            <div style="color:#9ca3af;font-size:14px">Developed with <span style="color:var(--green)">CornerFieldClub</span> for Modern Tropical Living</div>
           </div>
         </div>
       </footer>

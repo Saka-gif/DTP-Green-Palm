@@ -6,42 +6,73 @@
 </head>
 <body class="bg-green-50">
 
-<div class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
-    <a href="/rumah" 
-   class="text-green-600 mb-4 inline-block"
-    >
-   <-Kembali
-</a>
+<div class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
 
-    <h1 class="text-2xl font-bold text-green-700 mb-4">
+    {{-- Gambar --}}
+    @if($rumah->foto)
+        <img src="{{ asset('images/'.$rumah->foto) }}"
+             class="w-full h-72 object-cover rounded-lg mb-6">
+    @endif
+
+    {{-- Nama --}}
+    <h1 class="text-2xl font-bold text-green-800 mb-2">
         {{ $rumah->nama_rumah }}
     </h1>
 
-    @if($rumah->foto)
-        <img src="{{ asset('images/'.$rumah->foto) }}" 
-             class="w-full h-64 object-cover rounded mb-4">
+    {{-- Harga --}}
+    <p class="text-lg text-gray-700 mb-2">
+        Rp {{ number_format($rumah->harga, 0, ',', '.') }}
+    </p>
+
+    {{-- Deskripsi --}}
+    <p class="text-gray-600 mb-4">
+        {{ $rumah->deskripsi }}
+    </p>
+
+    {{-- Info tambahan --}}
+    <div class="grid grid-cols-2 gap-4 mb-6 text-sm text-gray-700">
+        <p><b>Luas Tanah:</b> {{ $rumah->luas_tanah ?? '-' }}</p>
+        <p><b>Luas Bangunan:</b> {{ $rumah->luas_bangunan ?? '-' }}</p>
+        <p><b>Kamar Tidur:</b> {{ $rumah->kamar_tidur ?? '-' }}</p>
+        <p><b>Kamar Mandi:</b> {{ $rumah->kamar_mandi ?? '-' }}</p>
+        <p><b>Lokasi:</b> {{ $rumah->lokasi }}</p>
+        <p><b>Tipe Rumah:</b> {{ $rumah->tipe->nama_tipe ?? '-' }}</p>
+    </div>
+
+    {{-- 🔥 BAGIAN RELASI UNIT --}}
+    <h3 class="text-lg font-bold text-green-700 mb-2">
+        Daftar Unit
+    </h3>
+
+    @if($rumah->units->count() > 0)
+        <div class="space-y-2">
+            @foreach($rumah->units as $unit)
+                <div class="flex justify-between bg-gray-100 p-2 rounded">
+                    <span>{{ $unit->kode_unit }}</span>
+
+                    <span class="
+                        px-2 py-1 text-xs rounded
+                        {{ $unit->status == 'Tersedia' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-700' }}">
+                        {{ $unit->status }}
+                    </span>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <p class="text-gray-500">Belum ada unit tersedia</p>
     @endif
 
-    <p class="text-gray-700 mb-2">
-        <strong>Harga:</strong> Rp {{ number_format($rumah->harga, 0, ',', '.') }}
-    </p>
+    {{-- Tombol --}}
+    <div class="mt-6 flex gap-3">
+        <a href="/" class="bg-gray-400 text-white px-4 py-2 rounded">
+            Kembali
+        </a>
 
-    <p class="text-gray-700 mb-2">
-        <strong>Lokasi:</strong> {{ $rumah->lokasi }}
-    </p>
-
-    <p class="text-gray-700 mb-4">
-        <strong>Deskripsi:</strong> {{ $rumah->deskripsi }}
-    </p>
-
-    <p class="text-gray-700">
-        <strong>Status:</strong> {{ $rumah->status }}
-    </p>
-
-      <a href="https://wa.me/6281234567890?text=Saya tertarik dengan rumah {{ $rumah->nama_rumah }}" 
-   target="_blank">
-   Hubungi via WhatsApp
-</a>
+        <a href="https://wa.me/628xxxxxxxxxx"
+           class="bg-green-600 text-white px-4 py-2 rounded">
+           Chat WhatsApp
+        </a>
+    </div>
 
 </div>
 
