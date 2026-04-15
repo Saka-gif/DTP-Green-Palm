@@ -195,6 +195,10 @@
         {{ $r->deskripsi }}
       </p>
 
+      <p class="text-sm text-gray-500">
+        Tipe: {{ $r->tipe->nama_tipe }}
+      </p>
+
 <span style="
   display:inline-block;
   margin-top:6px;

@@ -19,4 +19,10 @@ class Rumah extends Model
         'deskripsi',
         'foto'
     ];
+
+
+public function units()
+{
+    return $this->hasMany(UnitRumah::class);
+}
 }
