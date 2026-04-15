@@ -39,29 +39,6 @@
         <p><b>Tipe Rumah:</b> {{ $rumah->tipe->nama_tipe ?? '-' }}</p>
     </div>
 
-    {{-- 🔥 BAGIAN RELASI UNIT --}}
-    <h3 class="text-lg font-bold text-green-700 mb-2">
-        Daftar Unit
-    </h3>
-
-    @if($rumah->units->count() > 0)
-        <div class="space-y-2">
-            @foreach($rumah->units as $unit)
-                <div class="flex justify-between bg-gray-100 p-2 rounded">
-                    <span>{{ $unit->kode_unit }}</span>
-
-                    <span class="
-                        px-2 py-1 text-xs rounded
-                        {{ $unit->status == 'Tersedia' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-700' }}">
-                        {{ $unit->status }}
-                    </span>
-                </div>
-            @endforeach
-        </div>
-    @else
-        <p class="text-gray-500">Belum ada unit tersedia</p>
-    @endif
-
     {{-- Tombol --}}
     <div class="mt-6 flex gap-3">
         <a href="/" class="bg-gray-400 text-white px-4 py-2 rounded">

@@ -196,7 +196,11 @@
       </p>
 
       <p class="text-sm text-gray-500">
-        Tipe: {{ $r->tipe->nama_tipe }}
+      @if($r->tipe)
+    {{ $r->tipe->nama_tipe }}
+@else
+    -
+@endif
       </p>
 
 <span style="

@@ -30,12 +30,8 @@
         class="w-full border p-2 mb-3 rounded">
 
    <select name="status" class="w-full border p-2 mb-3 rounded">
-    <option value="Tersedia" {{ $rumah->status == 'Tersedia' ? 'selected' : '' }}>
-        Tersedia
-    </option>
-    <option value="Sold" {{ $rumah->status == 'Sold' ? 'selected' : '' }}>
-        Sold
-    </option>
+    <option value="Tersedia">Tersedia</option>
+    <option value="Sold">Sold</option>
 </select>
 
     <textarea name="deskripsi" class="w-full border p-2 mb-3 rounded" placeholder="Deskripsi"></textarea>

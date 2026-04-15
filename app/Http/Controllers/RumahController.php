@@ -15,8 +15,7 @@ class RumahController extends Controller
     }
 
     public function create()
-{
-    return view('rumah.create');
+    {
     $tipe = TipeRumah::all();
     return view('rumah.create', compact('tipe'));
 }

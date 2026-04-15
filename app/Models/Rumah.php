@@ -17,12 +17,13 @@ class Rumah extends Model
         'lokasi',
         'status',
         'deskripsi',
-        'foto'
+        'foto',
+        'tipe_id',
     ];
 
 
-public function units()
+public function tipe()
 {
-    return $this->hasMany(UnitRumah::class);
+    return $this->belongsTo(TipeRumah::class, 'tipe_id');
 }
 }

@@ -14,7 +14,7 @@ public function up(): void
     Schema::create('rumah', function (Blueprint $table) {
         $table->id();
         $table->string('nama_rumah');
-        $table->integer('harga');
+        $table->bigInteger('harga')->unsigned();
         $table->string('lokasi');
         $table->string('status');
         $table->text('deskripsi')->nullable();
