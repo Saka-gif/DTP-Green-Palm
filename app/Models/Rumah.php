@@ -19,6 +19,12 @@ class Rumah extends Model
         'deskripsi',
         'foto',
         'tipe_id',
+        'luas_tanah',
+        'luas_bangunan',
+        'kamar_tidur',
+        'kamar_mandi',
+        'lantai',
+        'carport',
     ];
 
 
