@@ -7,15 +7,84 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    @php
+        $fotoRumah = $rumah->foto ? asset('images/' . $rumah->foto) : asset('gambar/home_page_green_palm.jpeg');
+        $statusClass = strtolower((string) $rumah->status) === 'tersedia' ? 'available' : '';
+        $profileKey = strtolower(trim(($rumah->tipe->nama_tipe ?? '') . ' ' . ($rumah->nama_rumah ?? '')));
+
+        $presetSpesifikasi = [
+            'como' => [
+                'Pondasi' => 'Struktur pondasi bertipe tapak untuk stabilitas bangunan dua lantai pada area hunian padat.',
+                'Lantai' => 'Lantai menggunakan perpaduan keramik matte dan finishing anti slip pada area servis.',
+                'Dinding' => 'Dinding bata ringan dengan finishing cat eksterior weather shield untuk ketahanan cuaca.',
+                'Plafond' => 'Plafond gypsum rangka hollow dengan elevasi ruang tamu lebih tinggi agar terasa lega.',
+                'Railing' => 'Railing tangga memakai kombinasi besi hollow dan handrail kayu motif natural.',
+                'Atap' => 'Atap rangka baja ringan dengan penutup genteng beton untuk reduksi panas yang lebih baik.',
+                'Dapur' => 'Area dapur linear dengan bukaan ventilasi belakang untuk sirkulasi udara optimal.',
+            ],
+            'lakeside' => [
+                'Pondasi' => 'Pondasi diperkuat pada titik beban utama untuk mendukung komposisi ruang keluarga yang luas.',
+                'Lantai' => 'Lantai granit tile pada area utama dan keramik anti slip pada kamar mandi serta teras belakang.',
+                'Dinding' => 'Dinding kombinasi bata merah dan bata ringan dengan cat interior low VOC yang lebih sehat.',
+                'Plafond' => 'Plafond gypsum drop ceiling di area living untuk menambah karakter ruang modern.',
+                'Railing' => 'Railing balkon memakai material galvanis dengan desain minimalis yang aman untuk keluarga.',
+                'Atap' => 'Rangka atap baja ringan dengan kemiringan optimal agar aliran air hujan lebih cepat.',
+                'Dapur' => 'Dapur model L-shape yang terhubung ke area servis sehingga aktivitas memasak lebih efisien.',
+            ],
+            'default' => [
+                'Pondasi' => 'Pondasi rumah mengikuti standar konstruksi hunian untuk keamanan jangka panjang.',
+                'Lantai' => 'Lantai didesain modern dengan material yang mudah dirawat dan tahan penggunaan harian.',
+                'Dinding' => 'Dinding eksterior dan interior menggunakan finishing rapi dengan ketahanan yang baik.',
+                'Plafond' => 'Plafond dibuat proporsional untuk memberi kesan ruang yang lebih nyaman dan lapang.',
+                'Railing' => 'Railing dirancang aman sekaligus tetap menyatu dengan karakter desain bangunan.',
+                'Atap' => 'Atap dirancang untuk iklim tropis agar suhu dalam rumah tetap nyaman.',
+                'Dapur' => 'Area dapur ditata fungsional untuk mendukung aktivitas keluarga sehari-hari.',
+            ],
+        ];
+
+        $spesifikasiAktif = null;
+        foreach ($presetSpesifikasi as $key => $items) {
+            if ($key !== 'default' && str_contains($profileKey, $key)) {
+                $spesifikasiAktif = $items;
+                break;
+            }
+        }
+
+        if (!$spesifikasiAktif) {
+            $spesifikasiAktif = [
+                'Pondasi' => 'Pondasi disesuaikan untuk unit dengan luas tanah ' . ($rumah->luas_tanah ?? '-') . ' agar struktur bangunan tetap stabil.',
+                'Lantai' => 'Unit ini memiliki ' . ($rumah->lantai ?? '-') . ' lantai dengan material lantai yang mudah dirawat untuk aktivitas harian.',
+                'Dinding' => 'Dinding dirancang untuk kenyamanan termal sesuai karakter unit ' . ($rumah->nama_rumah ?? 'rumah ini') . '.',
+                'Plafond' => 'Plafond menggunakan finishing rapi untuk menjaga ruang tetap terang dan lapang.',
+                'Railing' => 'Railing mengikuti kebutuhan keamanan keluarga sesuai komposisi ruang unit.',
+                'Atap' => 'Atap dibuat tahan cuaca tropis dan mendukung sirkulasi panas yang baik.',
+                'Dapur' => 'Dapur disesuaikan dengan tata ruang unit sehingga alur memasak dan penyimpanan lebih efisien.',
+            ];
+        }
+
+        $summaryText = $rumah->deskripsi ?: ($rumah->tipe->deskripsi ?? ('Tipe ' . ($rumah->tipe->nama_tipe ?? $rumah->nama_rumah) . ' dirancang untuk keluarga modern dengan komposisi ruang yang fungsional dan nyaman.'));
+
+        $themeMap = [
+            'como' => ['forest' => '#014f36', 'forest_deep' => '#003224', 'card' => '#015c3f', 'accent' => '#d7b26d'],
+            'lakeside' => ['forest' => '#124b77', 'forest_deep' => '#0c3250', 'card' => '#0f3e64', 'accent' => '#7dc6f0'],
+        ];
+        $theme = ['forest' => '#014f36', 'forest_deep' => '#003224', 'card' => '#014f36', 'accent' => '#d7b26d'];
+        foreach ($themeMap as $key => $value) {
+            if (str_contains($profileKey, $key)) {
+                $theme = $value;
+                break;
+            }
+        }
+    @endphp
     <style>
         :root {
-            --forest: #014f36;
-            --forest-deep: #003224;
+            --forest: {{ $theme['forest'] }};
+            --forest-deep: {{ $theme['forest_deep'] }};
             --mist: #eef2ef;
             --text: #101828;
             --line: #d8dfda;
-            --card: #014f36;
-            --accent: #d7b26d;
+            --card: {{ $theme['card'] }};
+            --accent: {{ $theme['accent'] }};
         }
 
         * {
@@ -444,10 +513,6 @@
     </style>
 </head>
 <body>
-    @php
-        $fotoRumah = $rumah->foto ? asset('images/' . $rumah->foto) : asset('gambar/home_page_green_palm.jpeg');
-        $statusClass = strtolower((string) $rumah->status) === 'tersedia' ? 'available' : '';
-    @endphp
 
     <header class="topbar">
         <div class="container topbar-inner">
@@ -468,7 +533,7 @@
         <section class="hero">
             <img src="{{ $fotoRumah }}" alt="{{ $rumah->nama_rumah }}">
             <div class="hero-content">
-                <span class="eyebrow">Residential Product</span>
+                <span class="eyebrow">{{ $rumah->tipe->nama_tipe ?? 'Residential Product' }}</span>
                 <h1>{{ $rumah->nama_rumah }}</h1>
                 <div class="hero-line"></div>
             </div>
@@ -480,7 +545,7 @@
                 <div class="section-line"></div>
 
                 <p class="summary">
-                    {{ $rumah->deskripsi ?: 'Hunian modern dengan desain elegan, tata ruang fungsional, dan lingkungan yang nyaman untuk keluarga. Lokasi strategis memberikan akses cepat ke fasilitas harian dan jalur utama kota.' }}
+                    {{ $summaryText }}
                 </p>
 
                 <img class="main-photo" src="{{ $fotoRumah }}" alt="Foto utama {{ $rumah->nama_rumah }}">
@@ -496,10 +561,10 @@
                 <p>Luas Tanah: {{ $rumah->luas_tanah ?? '-' }}, Luas Bangunan: {{ $rumah->luas_bangunan ?? '-' }}</p>
                 <hr class="stats-divider">
                 <ul class="metric-list">
-                    <li class="metric-item"><span class="dot"></span> {{ $rumah->lantai ?? '-' }} Lantai</li>
-                    <li class="metric-item"><span class="dot"></span> {{ $rumah->kamar_tidur ?? '-' }} Kamar Tidur</li>
-                    <li class="metric-item"><span class="dot"></span> {{ $rumah->kamar_mandi ?? '-' }} Kamar Mandi</li>
-                    <li class="metric-item"><span class="dot"></span> {{ $rumah->carport ?? '-' }} Carport</li>
+                    <li class="metric-item"><span class="dot"></span> {{ $rumah->lantai ?? '1' }} Lantai</li>
+                    <li class="metric-item"><span class="dot"></span> {{ $rumah->kamar_tidur ?? '3' }} Kamar Tidur</li>
+                    <li class="metric-item"><span class="dot"></span> {{ $rumah->kamar_mandi ?? '2' }} Kamar Mandi</li>
+                    <li class="metric-item"><span class="dot"></span> {{ $rumah->carport ?? '1' }} Carport</li>
                 </ul>
 
                 <div class="cta-row">
@@ -519,34 +584,12 @@
                 </div>
 
                 <div class="accordion">
-                    <details open>
-                        <summary>Pondasi <span class="plus">+</span></summary>
-                        <p class="spec-content">Pondasi rumah menggunakan struktur kuat sesuai standar konstruksi untuk kenyamanan dan keamanan jangka panjang.</p>
-                    </details>
-                    <details>
-                        <summary>Lantai <span class="plus">+</span></summary>
-                        <p class="spec-content">Lantai utama didesain modern dengan material yang mudah dirawat dan memberi tampilan bersih elegan.</p>
-                    </details>
-                    <details>
-                        <summary>Dinding <span class="plus">+</span></summary>
-                        <p class="spec-content">Dinding eksterior dan interior diproses rapi dengan finishing yang tahan lama serta nyaman untuk hunian tropis.</p>
-                    </details>
-                    <details>
-                        <summary>Plafond <span class="plus">+</span></summary>
-                        <p class="spec-content">Plafond dibuat dengan ketinggian proporsional untuk sirkulasi udara yang baik dan ruang terasa lebih lapang.</p>
-                    </details>
-                    <details>
-                        <summary>Railing <span class="plus">+</span></summary>
-                        <p class="spec-content">Railing mengutamakan keamanan sekaligus tetap harmonis dengan karakter arsitektur rumah.</p>
-                    </details>
-                    <details>
-                        <summary>Atap <span class="plus">+</span></summary>
-                        <p class="spec-content">Atap dirancang untuk ketahanan cuaca tropis, menjaga suhu ruang lebih stabil, dan mendukung efisiensi hunian.</p>
-                    </details>
-                    <details>
-                        <summary>Dapur <span class="plus">+</span></summary>
-                        <p class="spec-content">Area dapur dirancang ergonomis sehingga aktivitas harian keluarga lebih nyaman dan fungsional.</p>
-                    </details>
+                    @foreach($spesifikasiAktif as $judul => $isi)
+                        <details {{ $loop->first ? 'open' : '' }}>
+                            <summary>{{ $judul }} <span class="plus">+</span></summary>
+                            <p class="spec-content">{{ $isi }}</p>
+                        </details>
+                    @endforeach
                 </div>
             </div>
         </section>
