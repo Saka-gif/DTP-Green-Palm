@@ -493,7 +493,7 @@
             </div>
 
             <aside class="stats-card">
-                <p>Luas Tanah : {{ $rumah->luas_tanah ?? '-' }}, Luas Bangunan : {{ $rumah->luas_bangunan ?? '-' }}</p>
+                <p>Luas Tanah: {{ $rumah->luas_tanah ?? '-' }}, Luas Bangunan: {{ $rumah->luas_bangunan ?? '-' }}</p>
                 <hr class="stats-divider">
                 <ul class="metric-list">
                     <li class="metric-item"><span class="dot"></span> {{ $rumah->lantai ?? '-' }} Lantai</li>

@@ -23,4 +23,26 @@ class TipeRumahController extends Controller
         TipeRumah::create($request->all());
         return redirect('/tiperumah');
     }
+
+  public function edit($id)
+{
+    $tipe = TipeRumah::find($id);
+    return view('tiperumah.edit', compact('tipe'));
+}
+
+public function update(Request $request, $id)
+{
+    $tipe = TipeRumah::find($id);
+    $tipe->update($request->all());
+
+    return redirect('/tiperumah');
+}
+
+public function destroy($id)
+{
+    $tipe = TipeRumah::find($id);
+    $tipe->delete();
+
+    return redirect('/tiperumah');
+}
 }

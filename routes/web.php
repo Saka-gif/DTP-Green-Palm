@@ -22,3 +22,6 @@ Route::get('/detail/{id}', [RumahController::class, 'detailUser']);
 Route::get('/tiperumah', [TipeRumahController::class, 'index']);
 Route::get('/tiperumah/create', [TipeRumahController::class, 'create']);
 Route::post('/tiperumah', [TipeRumahController::class, 'store']);
+Route::get('/tiperumah/{id}/edit', [TipeRumahController::class, 'edit']);
+Route::put('/tiperumah/{id}', [TipeRumahController::class, 'update']);
+Route::delete('/tiperumah/{id}', [TipeRumahController::class, 'destroy']);
