@@ -50,8 +50,12 @@
       /* Map preview */
       .map{height:260px;border-radius:12px;overflow:hidden}
 
-      /* Promo */
-      .promo{background:linear-gradient(90deg, rgba(30,139,87,0.06), rgba(212,175,55,0.04));padding:22px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  /* ensure promo block has a visible border per design request */
+  .promo{border:1px solid rgba(16,24,40,0.08);background:linear-gradient(90deg, rgba(30,139,87,0.03), rgba(212,175,55,0.02));padding:22px;border-radius:12px}
+  .callout-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;min-width:180px;border-radius:12px;font-weight:700;background:var(--green);color:#fff;text-decoration:none}
+
+    /* Inner now fills viewport; header moved outside the .container so it can touch edges */
+    header.site-header .inner{width:100%;max-width:none;margin:0;padding:18px 28px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:40px;background:rgba(255,255,255,0.98);box-shadow:0 8px 24px rgba(16,24,40,0.06);border-bottom:1px solid rgba(16,24,40,0.06);border-radius:0;min-height:76px;transition:all .28s ease}
 
       /* Testimonials */
       .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
@@ -71,8 +75,9 @@
       .footer-link:focus,
       .footer-link:focus-visible,
       .footer-link:active{outline:none;box-shadow:none}
-      .social-icon{transition:all 0.3s ease !important;transform:translateY(0)}
-      .social-icon:hover{background:var(--green) !important;transform:translateY(-4px);box-shadow:0 8px 20px rgba(30,139,87,0.3) !important}
+  .social-icon{transition:all 0.3s ease !important;transform:translateY(0);opacity:1 !important;visibility:visible !important}
+  .social-icon:hover{background:var(--green) !important;transform:translateY(-4px);box-shadow:0 8px 20px rgba(30,139,87,0.3) !important}
+  .social-icon .social-inner{color:white !important;opacity:1 !important}
       .social-icon.is-active{background:var(--green) !important;box-shadow:0 8px 20px rgba(30,139,87,0.35) !important;transform:translateY(-2px)}
       .footer-title{transition:color 0.3s ease}
 
@@ -134,10 +139,10 @@
               <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" target="_blank" class="cta-apply gold" aria-label="Download brosur">Brosur</a>
             </div>
           </div>
-        </header>
+  </header>
 
-        <!-- spacer untuk mencegah konten tertutup header -->
-        <div style="height:84px"></div>
+  <!-- spacer untuk mencegah konten tertutup header -->
+  <div style="height:84px"></div>
 
       <main>
         <div class="hero">
@@ -164,7 +169,7 @@
               <h3 style="margin:0;font-family:Montserrat">Tentang kami</h3>
               <div class="muted">Developer terpercaya yang berfokus pada hunian modern dan ramah lingkungan, menggabungkan kenyamanan dan kemudahan dalam satu kawasan.</div>
             </div>
-          </div>
+    </div>    
           <div style="display:flex;gap:18px;margin-top:16px;flex-wrap:wrap">
             <div class="card" style="flex:1;min-width:260px">
               <h4 style="margin:0 0 8px">Keunggulan Kami</h4>
@@ -302,7 +307,7 @@
               <div class="muted">Download brosur sekarang untuk melihat detail perumahan, harga, dan promo eksklusif.</div>
             </div>
             <div style="display:flex;gap:12px;align-items:center">
-            <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" class="btn primary" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 0px;min-width:180px;border-radius:12px;" target="_blank" download="brosur_green_palm.pdf">Get Brochure</a>
+              <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" class="callout-btn" target="_blank" download="brosur_green_palm.pdf">Get Brochure</a>
             </div>
           </div>
         </section>
@@ -315,7 +320,7 @@
               <div class="muted">Hubungi kami melalui WhatsApp untuk mendapat informasi lengkap dan info ketersediaan unit.</div>
             </div>
             <div>
-              <a href="https://wa.me/6282227274058?text=Hi%20Green%20Palm%2C%20apakah%20tipe%20ini%20masih%20tersedia" class="btn primary">Chat on WhatsApp</a>
+              <a href="https://wa.me/6282227274058?text=Hi%20Green%20Palm%2C%20apakah%20tipe%20ini%20masih%20tersedia" class="callout-btn" style="background:linear-gradient(135deg,var(--green),#27a16d);color:white">Chat on WhatsApp</a>
             </div>
           </div>
         </section>
@@ -337,10 +342,10 @@
               <p style="color:#9ca3af;margin:0 0 18px;line-height:1.6">Your trusted partner in finding the perfect tropical modern home. Quality living spaces designed for families.</p>
               <!-- Social Links -->
               <div style="display:flex;gap:12px">
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">f</a>
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">📷</a>
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">𝕏</a>
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s">in</a>
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">f</span></a>
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">📷</span></a>
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">𝕏</span></a>
+                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">in</span></a>
               </div>
             </div>
 
@@ -374,12 +379,12 @@
                 <span style="color:var(--green)">📞</span>
                 <a href="tel:+62 822-2727-4058" class="footer-link" style="color:#d1d5db;text-decoration:none">+62 822-2727-4058</a>
               </div>
-              <div style="display:flex;gap:10px;align-items:center">
-                <span style="color:var(--green)">✉️</span>
-                <a href="mailto:WWW.yusitatitin@gmail.com" class="footer-link" style="color:#d1d5db;text-decoration:none">WWW.yusitatitin@gmail.com</a>
+              <div style="display:flex;gap:12px;align-items:center">
+              <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" class="callout-btn" target="_blank" download="brosur_green_palm.pdf">Get Brochure</a>
               </div>
-            </div>
-          </div>
+              <div>
+                <a href="https://wa.me/6282227274058?text=Hi%20Green%20Palm%2C%20apakah%20tipe%20ini%20masih%20tersedia" class="callout-btn" style="background:linear-gradient(135deg,var(--green),#27a16d);color:white">Chat on WhatsApp</a>
+              </div>
 
           <!-- Footer Bottom -->
           <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
@@ -509,7 +514,11 @@
         const socialIcons = document.querySelectorAll('footer .social-icon');
         socialIcons.forEach((icon, index) => {
           icon.addEventListener('mouseenter', function() {
+            // Ensure the icon is visible before playing bounce (fix for disappearing icons)
             this.style.animation = 'none';
+            this.style.opacity = '1';
+            const inner = this.querySelector('.social-inner');
+            if(inner){ inner.style.opacity = '1'; inner.style.color = 'white'; }
             setTimeout(() => {
               this.style.animation = `bounce 0.6s ease`;
             }, 10);
@@ -527,8 +536,8 @@
             this.classList.add('is-active');
           });
 
-          // Stagger animation on page load
-          icon.style.opacity = '0';
+          // Stagger animation on page load (do not hard-set opacity here to avoid hiding)
+          icon.style.opacity = '';
           icon.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s forwards`;
         });
 
@@ -631,12 +640,19 @@
           transform: scale(0);
           animation: ripple 0.6s ease-out;
           pointer-events: none;
+          z-index: 0;
         }
 
         footer .social-icon {
           position: relative;
           overflow: hidden;
+          display:inline-flex;align-items:center;justify-content:center;
         }
+
+        /* Inner wrapper scales while ripple stays visually behind */
+  footer .social-icon .social-inner{display:inline-block;transform:scale(1);transition:transform .18s ease,color .18s ease;position:relative;z-index:3;font-size:16px;color:inherit;line-height:1}
+  footer .social-icon:hover .social-inner{transform:scale(1.28)}
+  footer .social-icon .ripple{z-index:0}
 
         /* Mobile optimize */
         @media (max-width: 768px) {
