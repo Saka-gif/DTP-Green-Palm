@@ -90,36 +90,54 @@
 
       /* Typewriter for headline */
       .typewriter{display:inline-block;overflow:hidden;border-right:.12em solid rgba(0,0,0,0.06);white-space:nowrap}
-      @keyframes typing{from{width:0}to{width:100%}}
-      @keyframes blink{50%{border-color:transparent}} 
+  @keyframes typing{from{width:0}to{width:100%}}
+  @keyframes blink{50%{border-color:transparent}}
+
+  /* Header (boxed card variant - image two) */
+  header.site-header{position:fixed;left:24px;right:24px;top:12px;z-index:999;pointer-events:auto}
+  header.site-header .inner{max-width:1200px;margin:0 auto;padding:12px 20px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(16,24,40,0.06);border:1px solid rgba(16,24,40,0.04);border-radius:12px;transition:all .28s ease}
+  header.site-header.scrolled .inner{box-shadow:0 10px 30px rgba(16,24,40,0.1)}
+  .site-logo img{width:60px;height:60px;object-fit:cover;border-radius:6px}
+  .site-nav{display:flex;gap:18px;align-items:center}
+  .site-nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 6px;border-radius:6px}
+  .site-nav a:hover{color:var(--green)}
+  .header-actions{display:flex;gap:12px;align-items:center}
+  .cta-apply{padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none}
+  .cta-apply.primary{background:var(--green);color:white}
+  .cta-apply.gold{background:var(--gold);color:#062828}
+  @media (max-width:780px){.site-nav{display:none}.header-actions .cta-apply{display:none}}
     </style>
   </head>
   <body>
     <div class="container">
-        <header style="position:fixed;left:24px;right:24px;top:12px;z-index:99;pointer-events:auto;">
-            <div style="width:100%;max-width:1200px;margin:0 auto;padding:12px 20px;box-sizing:border-box;
-                                    background:rgba(255,255,255,0.9);backdrop-filter:blur(6px);
-                                    box-shadow:0 6px 18px rgba(16,24,40,0.06);border:1px solid rgba(16,24,40,0.04);
-                                    border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:40px;">
-                <div class="brand" style="display:flex;gap:12px;align-items:center">
-                    <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="gambar tidak tersedia"
-                             style="width:60px;height:60px;object-fit:cover;border-radius:4px"/>
-                    <div>
-                        <div style="font-weight:800;color:var(--dark-green)">Green Palm</div>
-                        <div class="muted" style="font-size:12px">Asri • Modern • Terpercaya</div>
-                    </div>
-                </div>
 
-                <nav style="display:flex;gap:18px;align-items:center">
-                    <a href="#clusters">Tipe</a>
-                    <a href="#facilities">Fasilitas</a>
-                    <a href="#location">Lokasi</a>
-                </nav>
+        <!-- Header: overlay style (replaces previous boxed header) -->
+        <header class="site-header" aria-label="Main header">
+          <div class="inner">
+            <div class="brand site-logo" style="display:flex;align-items:center;gap:12px">
+              <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="Green Palm logo" />
+              <div style="line-height:1">
+                <div style="font-weight:800;color:var(--dark-green)">Green Palm</div>
+                <div class="muted" style="font-size:12px">Asri • Modern • Terpercaya</div>
+              </div>
             </div>
+
+            <nav class="site-nav" role="navigation" aria-label="Primary">
+              <a href="#about">Tentang</a>
+              <a href="#clusters">Tipe</a>
+              <a href="#facilities">Fasilitas</a>
+              <a href="#location">Lokasi</a>
+            </nav>
+
+            <div class="header-actions">
+              <a href="https://wa.me/6282227274058?text=Halo%20Green%20Palm" class="cta-apply primary" aria-label="Hubungi via WhatsApp">Hubungi</a>
+              <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" target="_blank" class="cta-apply gold" aria-label="Download brosur">Brosur</a>
+            </div>
+          </div>
         </header>
 
-    <!-- spacer untuk mencegah konten tertutup header -->
-    <div style="height:84px"></div>
+        <!-- spacer untuk mencegah konten tertutup header -->
+        <div style="height:84px"></div>
 
       <main>
         <div class="hero">
@@ -629,6 +647,18 @@
       `;
       document.head.appendChild(style);
     </script>
+      <script>
+        // Toggle header scrolled class based on scroll position
+        (function(){
+          var header = document.querySelector('header.site-header');
+          if(!header) return;
+          function onScroll(){
+            if(window.scrollY > 24) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+          }
+          onScroll();
+          window.addEventListener('scroll', onScroll, {passive:true});
+        })();
+      </script>
 
   </body>
 </html>
