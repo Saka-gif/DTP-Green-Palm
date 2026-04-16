@@ -65,57 +65,65 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
-    $data = Rumah::find($id);
+        $data = Rumah::find($id);
 
-   $request->validate([
-    'nama_rumah' => 'required',
-    'harga' => 'required|numeric',
-    'lokasi' => 'required',
-    'status' => 'required',
+        $validated = $request->validate([
+            'nama_rumah' => 'required',
+            'harga' => 'required|numeric',
+            'lokasi' => 'required',
+            'status' => 'required',
+            'tipe_id' => 'required|exists:tipe_rumah,id',
 
-    'deskripsi' => 'nullable',
-    'luas_tanah' => 'nullable',
-    'luas_bangunan' => 'nullable',
-    'kamar_tidur' => 'nullable|numeric',
-    'kamar_mandi' => 'nullable|numeric',
-    'lantai' => 'nullable|numeric',
-    'carport' => 'nullable|numeric',
+            'deskripsi' => 'nullable',
+            'luas_tanah' => 'nullable',
+            'luas_bangunan' => 'nullable',
+            'kamar_tidur' => 'nullable|numeric',
+            'kamar_mandi' => 'nullable|numeric',
+            'lantai' => 'nullable|numeric',
+            'carport' => 'nullable|numeric',
 
-    'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-]);
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
 
-    // CEK kalau upload foto baru
-    if ($request->hasFile('foto')) {
+        $input = $request->only([
+            'nama_rumah',
+            'harga',
+            'lokasi',
+            'status',
+            'tipe_id',
+            'deskripsi',
+            'luas_tanah',
+            'luas_bangunan',
+            'kamar_tidur',
+            'kamar_mandi',
+            'lantai',
+            'carport',
+        ]);
 
-        // hapus foto lama (opsional tapi bagus)
-        if ($data->foto && file_exists(public_path('images/'.$data->foto))) {
-            unlink(public_path('images/'.$data->foto));
+        if ($request->hasFile('foto')) {
+            if ($data->foto && file_exists(public_path('images/' . $data->foto))) {
+                unlink(public_path('images/' . $data->foto));
+            }
+
+            $file = $request->file('foto');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images'), $filename);
+            $input['foto'] = $filename;
         }
 
-        $file = $request->file('foto');
-        $filename = time().'.'.$file->getClientOriginalExtension();
-        $file->move(public_path('images'), $filename);
+        $data->update($input);
 
-        $data->foto = $filename;
+        return redirect('/rumah');
     }
 
-    // update data lain
-    $data->nama_rumah = $request->nama_rumah;
-    $data->harga = $request->harga;
-    $data->lokasi = $request->lokasi;
-    $data->save();
+    public function destroy($id)
+    {
+        $rumah = Rumah::find($id);
+        $rumah->delete();
+        return redirect('/rumah');
+    }
 
-    return redirect('/rumah');
-}
-
-public function destroy($id)
-{
-    $rumah = Rumah::find($id);
-    $rumah->delete();
-    return redirect('/rumah');
-}
-
-public function show($id)
+    public function show($id)
 {
     $rumah = Rumah::find($id);
     return view('rumah.detail', compact('rumah'));

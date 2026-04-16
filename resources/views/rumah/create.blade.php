@@ -51,6 +51,9 @@
 <input type="number" name="lantai" placeholder="Jumlah Lantai"
     class="w-full border p-2 mb-3 rounded">
 
+<input type="number" name="carport" placeholder="Jumlah Carport"
+    class="w-full border p-2 mb-3 rounded">
+
     <button class="bg-green-600 text-white px-4 py-2 rounded">
         Simpan
     </button>

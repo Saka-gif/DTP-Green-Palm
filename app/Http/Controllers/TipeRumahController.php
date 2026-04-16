@@ -24,23 +24,27 @@ class TipeRumahController extends Controller
         return redirect('/tiperumah');
     }
 
-  public function edit($id)
+public function edit($id)
 {
-    $tipe = TipeRumah::find($id);
+    $tipe = TipeRumah::findOrFail($id);
     return view('tiperumah.edit', compact('tipe'));
 }
 
 public function update(Request $request, $id)
 {
-    $tipe = TipeRumah::find($id);
-    $tipe->update($request->all());
+    $tipe = TipeRumah::findOrFail($id);
 
-    return redirect('/tiperumah');
+    $tipe->update([
+        'nama_tipe' => $request->nama_tipe,
+        'deskripsi' => $request->deskripsi
+    ]);
+
+    return redirect('/tiperumah')->with('success', 'Data berhasil diupdate');
 }
 
 public function destroy($id)
 {
-    $tipe = TipeRumah::find($id);
+    $tipe = TipeRumah::findOrFail($id);
     $tipe->delete();
 
     return redirect('/tiperumah');

@@ -13,7 +13,7 @@
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-green-800">Data Rumah</h1>
         <a href="/rumah/create" class="bg-green-600 text-white px-4 py-2 rounded-lg">
-            + Tambah Tipe Rumah
+            + Tambah Rumah
         </a>
     </div>
 

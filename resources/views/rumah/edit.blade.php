@@ -34,20 +34,32 @@
     {{ $rumah->deskripsi }}
 </textarea>
 
-<input type="text" name="luas_tanah" value="{{ $rumah->luas_tanah }}"
+<input type="text" name="luas_tanah" placeholder="Luas Tanah" value="{{ $rumah->luas_tanah }}"
     class="w-full border p-2 mb-3 rounded">
 
-<input type="text" name="luas_bangunan" value="{{ $rumah->luas_bangunan }}"
+<input type="text" name="luas_bangunan" placeholder="Luas Bangunan" value="{{ $rumah->luas_bangunan }}"
     class="w-full border p-2 mb-3 rounded">
 
-<input type="number" name="kamar_tidur" value="{{ $rumah->kamar_tidur }}"
+<input type="number" name="kamar_tidur" placeholder="Jumlah Kamar Tidur" value="{{ $rumah->kamar_tidur }}"
     class="w-full border p-2 mb-3 rounded">
 
-<input type="number" name="kamar_mandi" value="{{ $rumah->kamar_mandi }}"
+<input type="number" name="kamar_mandi" placeholder="Jumlah Kamar Mandi" value="{{ $rumah->kamar_mandi }}"
     class="w-full border p-2 mb-3 rounded">
 
-<input type="number" name="lantai" value="{{ $rumah->lantai }}"
+<input type="number" name="lantai" placeholder="Jumlah Lantai" value="{{ $rumah->lantai }}"
     class="w-full border p-2 mb-3 rounded">
+
+<input type="number" name="carport" placeholder="Jumlah Carport" value="{{ $rumah->carport }}"
+    class="w-full border p-2 mb-3 rounded">
+
+<select name="tipe_id" class="w-full border p-2 mb-3 rounded">
+    <option value="">Pilih Tipe Rumah</option>
+    @foreach(\App\Models\TipeRumah::all() as $tipe)
+        <option value="{{ $tipe->id }}" {{ $rumah->tipe_id == $tipe->id ? 'selected' : '' }}>
+            {{ $tipe->nama_tipe }}
+        </option>
+    @endforeach
+</select>
 
 
     <button class="bg-green-600 text-white px-4 py-2 rounded">
