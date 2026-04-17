@@ -51,8 +51,30 @@
       .map{height:260px;border-radius:12px;overflow:hidden}
 
   /* ensure promo block has a visible border per design request */
-  .promo{border:1px solid rgba(16,24,40,0.08);background:linear-gradient(90deg, rgba(30,139,87,0.03), rgba(212,175,55,0.02));padding:22px;border-radius:12px}
+  .promo{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border:1px solid rgba(16,24,40,0.08);background:linear-gradient(90deg, rgba(30,139,87,0.03), rgba(212,175,55,0.02));padding:22px;border-radius:12px}
   .callout-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;min-width:180px;border-radius:12px;font-weight:700;background:var(--green);color:#fff;text-decoration:none}
+
+  /* Button hover & transition styles (applies to all main buttons) */
+  .callout-btn, .btn, .cta-apply { transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; }
+
+  /* Slight lift and deeper color on hover for primary buttons */
+  .callout-btn:hover, .btn.primary:hover, .cta-apply.primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(16,24,40,0.12);
+  }
+
+  /* Darker gradient for callout hover to indicate interactivity */
+  .callout-btn:hover { background: linear-gradient(135deg,#178046,#247f58); }
+
+  /* Ghost buttons invert on hover to subtle green background */
+  .btn.ghost:hover {
+    background: rgba(30,139,87,0.06);
+    border-color: rgba(30,139,87,0.18);
+    color: var(--green);
+  }
+
+  /* Gold/secondary variants slight darken */
+  .cta-apply.gold:hover { filter:brightness(0.95); transform:translateY(-2px); }
 
     /* Inner now fills viewport; header moved outside the .container so it can touch edges */
     header.site-header .inner{width:100%;max-width:none;margin:0;padding:18px 28px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:40px;background:rgba(255,255,255,0.98);box-shadow:0 8px 24px rgba(16,24,40,0.06);border-bottom:1px solid rgba(16,24,40,0.06);border-radius:0;min-height:76px;transition:all .28s ease}
@@ -379,12 +401,7 @@
                 <span style="color:var(--green)">📞</span>
                 <a href="tel:+62 822-2727-4058" class="footer-link" style="color:#d1d5db;text-decoration:none">+62 822-2727-4058</a>
               </div>
-              <div style="display:flex;gap:12px;align-items:center">
-              <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" class="callout-btn" target="_blank" download="brosur_green_palm.pdf">Get Brochure</a>
-              </div>
-              <div>
-                <a href="https://wa.me/6282227274058?text=Hi%20Green%20Palm%2C%20apakah%20tipe%20ini%20masih%20tersedia" class="callout-btn" style="background:linear-gradient(135deg,var(--green),#27a16d);color:white">Chat on WhatsApp</a>
-              </div>
+              <!-- Footer brochure & WhatsApp buttons removed as requested -->
 
           <!-- Footer Bottom -->
           <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
@@ -395,11 +412,7 @@
       </footer>
     </div>
 
-    <!-- Floating WhatsApp button (replace number) -->
-    <a class="whatsapp-fixed" href="https://wa.me/6281234567890?text=Hello%20Green%20Palm%2C%20I%20want%20a%20brochure" aria-label="Chat on WhatsApp">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.52 3.478A11.883 11.883 0 0012 0C5.373 0 .03 5.343.03 11.97c0 2.108.55 4.18 1.6 6.02L0 24l6.27-1.61a11.92 11.92 0 005.73 1.46c6.628 0 11.97-5.343 11.97-11.97 0-3.19-1.243-6.19-3.44-8.31z" fill="#fff"/><path d="M17.2 14.3c-.3-.15-1.77-.85-2.04-.95-.27-.1-.47-.15-.67.15-.2.3-.75.95-.92 1.14-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.65-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2 0-.38-.02-.53-.02-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51-.17-.02-.37-.02-.57-.02-.2 0-.53.07-.8.38-.27.3-1.03 1.01-1.03 2.46 0 1.45 1.05 2.85 1.2 3.05.15.2 2.07 3.25 5.02 4.56 2.05.9 2.91.96 3.95.8.22-.03.7-.28.8-.55.1-.27.1-.5.07-.55-.03-.05-.27-.1-.57-.22z" fill="#1E8B57"/></svg>
-      <span style="font-weight:700">Chat WhatsApp</span>
-    </a>
+  <!-- Floating WhatsApp removed as requested -->
 
     <script>
 
