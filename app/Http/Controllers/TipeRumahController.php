@@ -47,6 +47,6 @@ public function destroy($id)
     $tipe = TipeRumah::findOrFail($id);
     $tipe->delete();
 
-    return redirect('/tiperumah');
+    return redirect('/admin.dashboard');
 }
 }
