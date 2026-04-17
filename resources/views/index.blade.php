@@ -27,9 +27,15 @@
       h1{font-family:Montserrat,Inter,Arial;font-size:38px;margin:0 0 12px;line-height:1.05;color:#063D2E}
       p.lead{color:var(--muted);margin:0 0 22px}
       .hero-ctas{display:flex;gap:12px}
-      .btn{padding:12px 16px;border-radius:12px;font-weight:700;border:0;cursor:pointer}
+      .btn{padding:12px 16px;border-radius:12px;font-weight:700;border:0;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
       .btn.primary{background:var(--green);color:white}
       .btn.ghost{background:transparent;border:2px solid rgba(16,24,40,0.06)}
+      .btn:hover{transform:translateY(-2px);transition:all .22s ease}
+      .btn.primary:hover{background:#fff;color:var(--green);border-color:var(--green);box-shadow:0 10px 24px rgba(30,139,87,0.16)}
+      .btn.ghost:hover,
+      .btn.ghost:active,
+      .btn.ghost:focus-visible{background:var(--green);border-color:var(--green);color:#fff !important;box-shadow:0 10px 24px rgba(22,107,68,0.28)}
+      .btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(30,139,87,0.28)}
 
       .hero-image{border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(16,24,40,0.08)}
       .hero-image img{width:100%;height:100%;display:block;object-fit:cover}
