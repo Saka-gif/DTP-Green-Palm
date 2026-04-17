@@ -342,8 +342,18 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 30px;
         margin-bottom: 18px;
+        box-shadow: 0 10px 18px rgba(15, 24, 42, 0.12);
+      }
+
+      .feature-icon svg {
+        width: 30px;
+        height: 30px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
       .feature-card h4 {
@@ -439,6 +449,17 @@
         justify-content: center;
         color: #fff;
         font-size: 30px;
+        box-shadow: 0 10px 18px rgba(15, 24, 42, 0.12);
+      }
+
+      .facility-badge svg {
+        width: 30px;
+        height: 30px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
       .facility-item strong {
@@ -664,6 +685,15 @@
         font-size: 28px;
         box-shadow: 0 14px 24px rgba(8, 83, 50, 0.35);
         z-index: 999;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .whatsapp-fixed svg {
+        width: 27px;
+        height: 27px;
+        display: block;
+        flex-shrink: 0;
       }
 
       .reveal {
@@ -808,22 +838,43 @@
 
           <div class="feature-grid">
             <article class="feature-card reveal">
-              <div class="feature-icon">&#128205;</div>
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 21s-6-4.8-6-10a6 6 0 1 1 12 0c0 5.2-6 10-6 10z"></path>
+                  <circle cx="12" cy="11" r="2.2"></circle>
+                </svg>
+              </div>
               <h4>Lokasi strategis & akses transportasi yang mudah</h4>
               <p>Mudah menjangkau area bisnis, sekolah, dan pusat kebutuhan harian.</p>
             </article>
             <article class="feature-card reveal">
-              <div class="feature-icon">&#128737;</div>
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3l7 3v5c0 4.5-3 8.7-7 10-4-1.3-7-5.5-7-10V6l7-3z"></path>
+                  <path d="M9.5 12.2l1.9 1.9 3.2-3.9"></path>
+                </svg>
+              </div>
               <h4>Keamanan 24 jam</h4>
               <p>Lingkungan aman dengan pengawasan berlapis untuk kenyamanan keluarga.</p>
             </article>
             <article class="feature-card reveal">
-              <div class="feature-icon">&#127795;</div>
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 20V9"></path>
+                  <path d="M8 20c0-4 1.8-6.5 4-6.5S16 16 16 20"></path>
+                  <path d="M5 11c1.5-1.2 2.8-1.8 4.5-1.8S13 10 15 12c1.4-2.4 3.2-3.5 4.8-3.8"></path>
+                  <path d="M7 8c1-2.2 2.7-3.4 5-3.4S16 5.8 17 8"></path>
+                </svg>
+              </div>
               <h4>Desain yang ramah lingkungan & ruang terbuka hijau</h4>
               <p>Udara lebih segar dengan tata kawasan yang hijau dan berkelanjutan.</p>
             </article>
             <article class="feature-card reveal">
-              <div class="feature-icon">&#10084;</div>
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 21s-7-4.6-7-10a4.2 4.2 0 0 1 7-3.2A4.2 4.2 0 0 1 19 11c0 5.4-7 10-7 10z"></path>
+                </svg>
+              </div>
               <h4>Tempat tinggal nyaman untuk keluarga</h4>
               <p>Ruang hunian modern yang dirancang untuk aktivitas keluarga sehari-hari.</p>
             </article>
@@ -889,22 +940,44 @@
 
           <div class="facility-grid">
             <div class="facility-item reveal">
-              <div class="facility-badge" style="background:#2857e3;">&#128274;</div>
+              <div class="facility-badge" style="background:#2957f0;">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3l7 3v5c0 4.5-3 8.7-7 10-4-1.3-7-5.5-7-10V6l7-3z"></path>
+                  <path d="M9.5 12.2l1.9 1.9 3.2-3.9"></path>
+                </svg>
+              </div>
               <strong>24-hour Security</strong>
               <div class="muted">Gated community & CCTV</div>
             </div>
             <div class="facility-item reveal">
-              <div class="facility-badge" style="background:#7f1be5;">&#128247;</div>
+              <div class="facility-badge" style="background:#8b1eea;">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 7h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"></path>
+                  <path d="M9 7l1.5-2h3L15 7"></path>
+                  <circle cx="12" cy="13" r="2.5"></circle>
+                </svg>
+              </div>
               <strong>Mosque</strong>
               <div class="muted">Community prayer facility</div>
             </div>
             <div class="facility-item reveal">
-              <div class="facility-badge" style="background:#07966a;">&#127795;</div>
+              <div class="facility-badge" style="background:#0d9a6e;">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 20V9"></path>
+                  <path d="M8 20c0-4 1.8-6.5 4-6.5S16 16 16 20"></path>
+                  <path d="M5 11c1.5-1.2 2.8-1.8 4.5-1.8S13 10 15 12c1.4-2.4 3.2-3.5 4.8-3.8"></path>
+                  <path d="M7 8c1-2.2 2.7-3.4 5-3.4S16 5.8 17 8"></path>
+                </svg>
+              </div>
               <strong>Green Park</strong>
               <div class="muted">Open spaces & landscaping</div>
             </div>
             <div class="facility-item reveal">
-              <div class="facility-badge" style="background:#e00f3b;">&#10084;</div>
+              <div class="facility-badge" style="background:#e3154d;">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 21s-7-4.6-7-10a4.2 4.2 0 0 1 7-3.2A4.2 4.2 0 0 1 19 11c0 5.4-7 10-7 10z"></path>
+                </svg>
+              </div>
               <strong>Comfort Zone</strong>
               <div class="muted">Family-focused living area</div>
             </div>
@@ -1068,7 +1141,12 @@
       </div>
     </footer>
 
-    <a href="https://wa.me/6282227274058?text=Hello%20Green%20Palm%2C%20saya%20ingin%20tanya%20lebih%20lanjut" class="whatsapp-fixed" aria-label="Chat on WhatsApp">WA</a>
+    <a href="https://wa.me/6282227274058?text=Hello%20Green%20Palm%2C%20saya%20ingin%20tanya%20lebih%20lanjut" class="whatsapp-fixed" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M13.601 2.326A7.854 7.854 0 0 0 8.04 0C3.65 0 .073 3.577.073 7.967c0 1.4.366 2.77 1.06 3.98L0 16l4.173-1.094a7.93 7.93 0 0 0 3.867 1h.003c4.39 0 7.967-3.577 7.967-7.967a7.95 7.95 0 0 0-2.409-5.613zM8.043 14.63a6.57 6.57 0 0 1-3.351-.92l-.24-.144-2.475.649.66-2.413-.156-.247a6.56 6.56 0 0 1-1.008-3.505c0-3.626 2.95-6.576 6.578-6.576a6.53 6.53 0 0 1 4.648 1.93 6.53 6.53 0 0 1 1.92 4.65c-.001 3.626-2.95 6.575-6.576 6.575z"></path>
+        <path fill="currentColor" d="M11.815 9.983c-.198-.099-1.17-.578-1.352-.644-.182-.066-.315-.099-.447.1-.132.198-.513.644-.628.776-.116.132-.231.149-.43.05-.198-.1-.836-.308-1.592-.983-.588-.525-.985-1.174-1.1-1.372-.116-.198-.012-.305.087-.404.089-.088.198-.231.297-.347.099-.115.132-.198.198-.33.066-.132.033-.248-.017-.347-.05-.099-.446-1.076-.611-1.473-.161-.387-.325-.334-.446-.34a7.004 7.004 0 0 0-.38-.006c-.132 0-.347.05-.53.248-.182.198-.694.677-.694 1.65s.71 1.914.81 2.046c.099.132 1.398 2.136 3.39 2.995.474.205.843.328 1.132.42.475.152.908.13 1.25.079.381-.057 1.17-.479 1.336-.942.165-.463.165-.86.116-.942-.05-.083-.182-.132-.38-.231z"></path>
+      </svg>
+    </a>
 
     <script>
       (function () {

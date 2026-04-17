@@ -47,6 +47,7 @@ public function destroy($id)
     $tipe = TipeRumah::findOrFail($id);
     $tipe->delete();
 
-    return redirect('/tiperumah');
+    return redirect()->route('admin.dashboard')
+        ->with('success', 'Data tipe rumah berhasil dihapus');
 }
 }
