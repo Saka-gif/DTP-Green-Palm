@@ -8,10 +8,19 @@
 <div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
 
 <h1 class="text-xl font-bold text-green-800 mb-4">Tambah Rumah</h1>
+
+@if ($errors->any())
+    <div class="bg-red-100 text-red-700 p-3 mb-3 rounded">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
+
 <form action="/rumah" method="POST" enctype="multipart/form-data">
     @csrf
 
-<select name="tipe_id" class="w-full border p-2 mb-3 rounded">
+<select name="tipe_id" required class="w-full border p-2 mb-3 rounded">
     <option value="">-- Pilih Tipe Rumah --</option>
     @foreach($tipe as $t)
         <option value="{{ $t->id }}">{{ $t->nama_tipe }}</option>
