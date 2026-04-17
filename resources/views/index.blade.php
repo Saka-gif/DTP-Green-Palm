@@ -3,697 +3,1108 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Green Palm — Find Your Dream Home Today</title>
+    <title>Green Palm - Find Your Dream Home Today</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/png" href="{{ asset('gambar/logo_green_palm.jpeg') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-      :root{--green:#1E8B57;--dark-green:#166B44;--gold:#D4AF37;--muted:#6B7280;--glass:rgba(255,255,255,0.08)}
-      html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-      body{background:linear-gradient(180deg,#f6fff5 0%, #ffffff 100%);color:#0f172a}
-      .container{max-width:1200px;margin:0 auto;padding:28px}
-      /* Header */
-      header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-      .brand{display:flex;gap:12px;align-items:center}
-      .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--green),#4fb07a);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 6px 18px rgba(16,24,40,0.08)}
-      nav a{margin-left:18px;color:var(--muted);text-decoration:none;font-weight:600}
-      nav a.cta{background:var(--gold);color:#062828;padding:10px 14px;border-radius:10px}
+      :root {
+        --green: #0f9a6d;
+        --dark-green: #0a6a4a;
+        --ink: #0e1730;
+        --muted: #4b5f78;
+        --gold: #d5b025;
+        --surface: #f5f7fb;
+        --card: #ffffff;
+        --border: #e7ebf2;
+      }
 
-      /* Hero */
-      .hero{display:grid;grid-template-columns:1fr 440px;gap:28px;align-items:center;margin-top:20px}
-      .hero-card{background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.4));padding:36px;border-radius:18px;box-shadow:0 10px 30px rgba(16,24,40,0.06);backdrop-filter: blur(6px)}
-      .kicker{display:inline-block;background:var(--green);color:white;padding:8px 12px;border-radius:999px;font-weight:700;margin-bottom:14px}
-      h1{font-family:Montserrat,Inter,Arial;font-size:38px;margin:0 0 12px;line-height:1.05;color:#063D2E}
-      p.lead{color:var(--muted);margin:0 0 22px}
-      .hero-ctas{display:flex;gap:12px}
-      .btn{padding:12px 16px;border-radius:12px;font-weight:700;border:0;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-      .btn.primary{background:var(--green);color:white}
-      .btn.ghost{background:transparent;border:2px solid rgba(16,24,40,0.06)}
-      .btn:hover{transform:translateY(-2px);transition:all .22s ease}
-      .btn.primary:hover{background:#fff;color:var(--green);border-color:var(--green);box-shadow:0 10px 24px rgba(30,139,87,0.16)}
-      .btn.ghost:hover,
-      .btn.ghost:active,
-      .btn.ghost:focus-visible{background:var(--green);border-color:var(--green);color:#fff !important;box-shadow:0 10px 24px rgba(22,107,68,0.28)}
-      .btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(30,139,87,0.28)}
+      * {
+        box-sizing: border-box;
+      }
 
-      .hero-image{border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(16,24,40,0.08)}
-      .hero-image img{width:100%;height:100%;display:block;object-fit:cover}
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+        color: var(--ink);
+        background: var(--surface);
+        scroll-behavior: smooth;
+      }
 
-      /* Sections */
-      section{margin-top:48px}
-      .section-head{display:flex;align-items:center;justify-content:space-between}
-      .grid{display:grid;gap:18px}
-      .clusters{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
-      .card{background:white;border-radius:14px;padding:16px;box-shadow:0 8px 24px rgba(16,24,40,0.04)}
-      .card img{width: 100%;height: 260px;;object-fit:cover;border-radius:10px}
-      .muted{color:var(--muted)}
+      a {
+        color: inherit;
+      }
 
-      /* Facilities */
-      .facilities{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
-      .fac{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--glass);}
+      .container {
+        max-width: 1220px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
 
-      /* Map preview */
-      .map{height:260px;border-radius:12px;overflow:hidden}
+      .site-header {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2000;
+        transform: translateZ(0);
+        will-change: transform;
+        background: linear-gradient(180deg, rgba(0, 82, 50, 0.7), rgba(0, 82, 50, 0.52));
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(10px);
+      }
 
-  /* ensure promo block has a visible border per design request */
-  .promo{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border:1px solid rgba(16,24,40,0.08);background:linear-gradient(90deg, rgba(30,139,87,0.03), rgba(212,175,55,0.02));padding:22px;border-radius:12px}
-  .callout-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;min-width:180px;border-radius:12px;font-weight:700;background:var(--green);color:#fff;text-decoration:none}
+      .header-inner {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 14px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        transition: background 0.25s ease, padding 0.25s ease;
+      }
 
-  /* Button hover & transition styles (applies to all main buttons) */
-  .callout-btn, .btn, .cta-apply { transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; }
+      .site-header.scrolled .header-inner {
+        background: transparent;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
 
-  /* Slight lift and deeper color on hover for primary buttons */
-  .callout-btn:hover, .btn.primary:hover, .cta-apply.primary:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(16,24,40,0.12);
-  }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
 
-  /* Darker gradient for callout hover to indicate interactivity */
-  .callout-btn:hover { background: linear-gradient(135deg,#178046,#247f58); }
+      .brand img {
+        width: 52px;
+        height: 52px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
 
-  /* Ghost buttons invert on hover to subtle green background */
-  .btn.ghost:hover {
-    background: rgba(30,139,87,0.06);
-    border-color: rgba(30,139,87,0.18);
-    color: var(--green);
-  }
+      .brand-title {
+        font-weight: 800;
+        font-family: Montserrat, Inter, sans-serif;
+        color: #ffffff;
+      }
 
-  /* Gold/secondary variants slight darken */
-  .cta-apply.gold:hover { filter:brightness(0.95); transform:translateY(-2px); }
+      .brand-sub {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 12px;
+      }
 
-    /* Inner now fills viewport; header moved outside the .container so it can touch edges */
-    header.site-header .inner{width:100%;max-width:none;margin:0;padding:18px 28px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:40px;background:rgba(255,255,255,0.98);box-shadow:0 8px 24px rgba(16,24,40,0.06);border-bottom:1px solid rgba(16,24,40,0.06);border-radius:0;min-height:76px;transition:all .28s ease}
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
 
-      /* Testimonials */
-      .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-      .testimonial{padding:16px;border-radius:12px;background:#ffffff}
+      .site-nav a {
+        text-decoration: none;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.92);
+        transition: color 0.2s ease, opacity 0.2s ease;
+      }
 
-      /* Footer */
-      footer{margin-top:48px;padding:30px 0;border-top:1px solid rgba(16,24,40,0.04)}
+      .site-nav a:hover {
+        color: #ffffff;
+      }
 
-      /* Floating WhatsApp */
-      .whatsapp-fixed{position:fixed;right:18px;bottom:18px;background:linear-gradient(135deg,var(--green),#27a16d);color:white;padding:14px;border-radius:999px;box-shadow:0 12px 30px rgba(16,24,40,0.12);display:flex;gap:12px;align-items:center;text-decoration:none;transition:all 0.3s ease;z-index:999}
-      .whatsapp-fixed:hover{transform:scale(1.1);box-shadow:0 16px 40px rgba(30,139,87,0.3)}
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-      /* Footer Interactive Styles */
-      .footer-link{transition:all 0.3s ease;display:inline-block}
-      .footer-link:hover{color:var(--green) !important;transform:translateX(4px)}
-      .footer-link.is-active{color:var(--green) !important;transform:translateX(6px);font-weight:700}
-      .footer-link:focus,
-      .footer-link:focus-visible,
-      .footer-link:active{outline:none;box-shadow:none}
-  .social-icon{transition:all 0.3s ease !important;transform:translateY(0);opacity:1 !important;visibility:visible !important}
-  .social-icon:hover{background:var(--green) !important;transform:translateY(-4px);box-shadow:0 8px 20px rgba(30,139,87,0.3) !important}
-  .social-icon .social-inner{color:white !important;opacity:1 !important}
-      .social-icon.is-active{background:var(--green) !important;box-shadow:0 8px 20px rgba(30,139,87,0.35) !important;transform:translateY(-2px)}
-      .footer-title{transition:color 0.3s ease}
+      .cta-apply {
+        text-decoration: none;
+        font-weight: 700;
+        padding: 9px 16px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.92);
+        border: 1px solid transparent;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      }
 
-      @media (max-width:980px){.hero{grid-template-columns:1fr;}.hero-image{order:-1}.hero-card{order:2}.hero{gap:18px}}
+      .cta-apply.primary {
+        background: linear-gradient(135deg, #0fb276, #0c9564);
+        color: #ffffff;
+        box-shadow: 0 8px 20px rgba(10, 149, 100, 0.28);
+      }
 
-      /* Interaction & micro-animations */
-      .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,.84,.44,1),transform .7s cubic-bezier(.16,.84,.44,1);will-change:opacity,transform}
-      .reveal.in-view{opacity:1;transform:none}
-      .card{transition:transform .28s ease,box-shadow .28s ease}
-      .card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 18px 40px rgba(16,24,40,0.08)}
-      .hero-image img{transition:transform .6s cubic-bezier(.16,.84,.44,1)}
-      .whatsapp-fixed{transition:transform .28s ease,box-shadow .28s ease}
-      .whatsapp-fixed.pulse{animation:pulse 2.6s infinite}
-      @keyframes pulse{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+      .cta-apply.gold {
+        background: linear-gradient(135deg, #efd66d, #ddb842);
+        color: #24300f;
+        box-shadow: 0 8px 20px rgba(221, 184, 66, 0.3);
+      }
 
-      /* Typewriter for headline */
-      .typewriter{display:inline-block;overflow:hidden;border-right:.12em solid rgba(0,0,0,0.06);white-space:nowrap}
-  @keyframes typing{from{width:0}to{width:100%}}
-  @keyframes blink{50%{border-color:transparent}}
+      .cta-apply:hover {
+        transform: translateY(-2px);
+      }
 
-  /* Header (boxed card variant - image two) */
-  header.site-header{position:fixed;left:24px;right:24px;top:12px;z-index:999;pointer-events:auto}
-  header.site-header .inner{max-width:1200px;margin:0 auto;padding:12px 20px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(16,24,40,0.06);border:1px solid rgba(16,24,40,0.04);border-radius:12px;transition:all .28s ease}
-  header.site-header.scrolled .inner{box-shadow:0 10px 30px rgba(16,24,40,0.1)}
-  .site-logo img{width:60px;height:60px;object-fit:cover;border-radius:6px}
-  .site-nav{display:flex;gap:18px;align-items:center}
-  .site-nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 6px;border-radius:6px}
-  .site-nav a:hover{color:var(--green)}
-  .header-actions{display:flex;gap:12px;align-items:center}
-  .cta-apply{padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none}
-  .cta-apply.primary{background:var(--green);color:white}
-  .cta-apply.gold{background:var(--gold);color:#062828}
-  @media (max-width:780px){.site-nav{display:none}.header-actions .cta-apply{display:none}}
+      .cta-apply.primary:hover {
+        filter: brightness(1.05);
+        box-shadow: 0 12px 22px rgba(10, 149, 100, 0.35);
+      }
+
+      .cta-apply.gold:hover {
+        filter: brightness(1.04);
+        box-shadow: 0 12px 22px rgba(221, 184, 66, 0.38);
+      }
+
+      .hero {
+        min-height: 100vh;
+        background:
+          linear-gradient(110deg, rgba(7, 15, 28, 0.72) 0%, rgba(6, 14, 27, 0.46) 45%, rgba(4, 12, 24, 0.64) 100%),
+          url("{{ asset('gambar/home_page_green_palm.jpeg') }}") center center / cover no-repeat;
+        display: grid;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 180px;
+        background: linear-gradient(to top, rgba(4, 9, 18, 0.45), transparent);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 640px;
+        padding-top: 110px;
+        padding-bottom: 70px;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 700;
+        color: #74f0bf;
+        background: rgba(15, 154, 109, 0.28);
+        border: 1px solid rgba(85, 239, 176, 0.34);
+        border-radius: 999px;
+        padding: 9px 14px;
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-family: Montserrat, Inter, sans-serif;
+        color: #fff;
+        font-size: clamp(2.3rem, 5vw, 4rem);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+      }
+
+      .hero .lead {
+        margin-top: 16px;
+        margin-bottom: 24px;
+        color: #e9eef7;
+        font-size: clamp(1rem, 1.6vw, 1.2rem);
+        line-height: 1.55;
+        max-width: 560px;
+      }
+
+      .hero-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        padding: 13px 22px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      .btn.primary {
+        background: var(--green);
+        color: #fff;
+        box-shadow: 0 10px 28px rgba(10, 154, 109, 0.28);
+      }
+
+      .btn.ghost {
+        background: #fff;
+        color: #0f2745;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+
+      .btn.primary:hover {
+        box-shadow: 0 16px 30px rgba(10, 154, 109, 0.33);
+      }
+
+      .btn.ghost:hover {
+        background: #eef3fa;
+      }
+
+      .scroll-hint {
+        position: absolute;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 30px;
+        z-index: 3;
+        animation: up-down 1.8s infinite ease-in-out;
+      }
+
+      @keyframes up-down {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-7px);
+        }
+      }
+
+      section {
+        padding: 84px 0;
+      }
+
+      .section-title-wrap {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto 44px;
+      }
+
+      .section-title {
+        margin: 0;
+        font-family: Montserrat, Inter, sans-serif;
+        font-size: clamp(2rem, 3.5vw, 3.2rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+
+      .section-title .accent {
+        color: var(--green);
+      }
+
+      .section-divider {
+        width: 96px;
+        height: 4px;
+        border-radius: 999px;
+        margin: 14px auto 20px;
+        background: linear-gradient(90deg, var(--green), var(--gold));
+      }
+
+      .section-desc {
+        margin: 0;
+        font-size: 1.04rem;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .feature-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px 26px;
+        box-shadow: 0 8px 22px rgba(15, 24, 42, 0.05);
+      }
+
+      .feature-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+        background: var(--green);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        margin-bottom: 18px;
+      }
+
+      .feature-card h4 {
+        margin: 0 0 10px;
+        font-family: Montserrat, Inter, sans-serif;
+        font-size: 1.18rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      #clusters {
+        background: #eef4f8;
+      }
+
+      .section-top-row {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .section-top-row h3 {
+        margin: 0;
+        font-family: Montserrat, Inter, sans-serif;
+        font-size: clamp(1.9rem, 3.3vw, 2.8rem);
+      }
+
+      .section-top-row .accent {
+        color: var(--green);
+      }
+
+      .clusters-sub {
+        text-align: center;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+
+      .grid.clusters {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 8px 24px rgba(16, 24, 40, 0.05);
+      }
+
+      .card img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      #facilities {
+        background: var(--surface);
+      }
+
+      .facility-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .facility-item {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px 16px;
+        text-align: center;
+        box-shadow: 0 8px 22px rgba(16, 24, 40, 0.05);
+      }
+
+      .facility-badge {
+        width: 62px;
+        height: 62px;
+        margin: 0 auto 14px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 30px;
+      }
+
+      .facility-item strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+      }
+
+      .facility-item .muted {
+        font-size: 0.95rem;
+      }
+
+      #location {
+        background: #eef4f7;
+      }
+
+      .location-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+        gap: 26px;
+        align-items: stretch;
+      }
+
+      .location-map {
+        min-height: 420px;
+        border-radius: 18px;
+        background: linear-gradient(170deg, #0da06f, #067c56);
+        color: #fff;
+        padding: 30px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        box-shadow: 0 14px 28px rgba(8, 92, 64, 0.24);
+      }
+
+      .location-map .map-icon {
+        font-size: 70px;
+        opacity: 0.94;
+        margin-bottom: 8px;
+      }
+
+      .location-map h4 {
+        margin: 0 0 10px;
+        font-family: Montserrat, Inter, sans-serif;
+        font-size: 2rem;
+      }
+
+      .location-map p {
+        margin: 0;
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .location-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .location-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 8px 20px rgba(16, 24, 40, 0.06);
+      }
+
+      .location-item-icon {
+        min-width: 48px;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--green);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+
+      .location-item-main {
+        flex: 1;
+      }
+
+      .location-item-main h5 {
+        margin: 2px 0 8px;
+        font-family: Montserrat, Inter, sans-serif;
+        font-size: 1.18rem;
+      }
+
+      .location-item-main ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .location-item-main li {
+        margin-bottom: 4px;
+      }
+
+      .distance-pill {
+        background: #c8f4df;
+        color: #07885e;
+        font-weight: 700;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 0.93rem;
+        white-space: nowrap;
+      }
+
+      .route-link {
+        margin-top: 10px;
+        display: inline-flex;
+        color: var(--green);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      #promo .promo,
+      #contact .contact-cta {
+        border: 1px solid var(--border);
+        background: linear-gradient(95deg, rgba(15, 154, 109, 0.07), rgba(213, 176, 37, 0.06));
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .callout-btn {
+        border: 0;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700;
+        padding: 12px 20px;
+        min-width: 180px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--green), #0a7d59);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .callout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(10, 125, 89, 0.3);
+      }
+
+      footer {
+        margin-top: 28px;
+        background: #162e27;
+        color: #e0e7ff;
+        padding: 44px 0 24px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 30px;
+      }
+
+      .footer-link {
+        text-decoration: none;
+        color: #d1d5db;
+      }
+
+      .footer-link:hover {
+        color: #94f1ca;
+      }
+
+      .socials {
+        display: flex;
+        gap: 10px;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .social-icon:hover {
+        background: var(--green);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        padding-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        color: #a9b2be;
+        font-size: 14px;
+      }
+
+      .whatsapp-fixed {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        width: 56px;
+        height: 56px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #06be63, #0a9c55);
+        color: #fff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 14px 24px rgba(8, 83, 50, 0.35);
+        z-index: 999;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+
+      .reveal.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1080px) {
+        .feature-grid,
+        .facility-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .location-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .location-map {
+          min-height: 300px;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .site-nav {
+          display: none;
+        }
+
+        .hero-content {
+          padding-top: 120px;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .container {
+          padding: 0 18px;
+        }
+
+        .site-header {
+          top: 0;
+          left: 0;
+          right: 0;
+        }
+
+        .header-inner {
+          margin: 0;
+          padding: 12px 14px;
+        }
+
+        .brand img {
+          width: 44px;
+          height: 44px;
+        }
+
+        .brand-title {
+          font-size: 0.95rem;
+        }
+
+        .header-actions {
+          gap: 8px;
+        }
+
+        .cta-apply {
+          padding: 8px 12px;
+          font-size: 0.85rem;
+        }
+
+        .hero {
+          min-height: 92vh;
+        }
+
+        .feature-grid,
+        .facility-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-title-wrap {
+          margin-bottom: 30px;
+        }
+
+        section {
+          padding: 64px 0;
+        }
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-
-        <!-- Header: overlay style (replaces previous boxed header) -->
-        <header class="site-header" aria-label="Main header">
-          <div class="inner">
-            <div class="brand site-logo" style="display:flex;align-items:center;gap:12px">
-              <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="Green Palm logo" />
-              <div style="line-height:1">
-                <div style="font-weight:800;color:var(--dark-green)">Green Palm</div>
-                <div class="muted" style="font-size:12px">Asri • Modern • Terpercaya</div>
-              </div>
-            </div>
-
-            <nav class="site-nav" role="navigation" aria-label="Primary">
-              <a href="#about">Tentang</a>
-              <a href="#clusters">Tipe</a>
-              <a href="#facilities">Fasilitas</a>
-              <a href="#location">Lokasi</a>
-            </nav>
-
-            <div class="header-actions">
-              <a href="https://wa.me/6282227274058?text=Halo%20Green%20Palm" class="cta-apply primary" aria-label="Hubungi via WhatsApp">Hubungi</a>
-              <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" target="_blank" class="cta-apply gold" aria-label="Download brosur">Brosur</a>
-            </div>
-          </div>
-  </header>
-
-  <!-- spacer untuk mencegah konten tertutup header -->
-  <div style="height:84px"></div>
-
-      <main>
-        <div class="hero">
-          <div class="hero-card">
-            <span class="kicker">Hunian Nyaman & Modern</span>
-            <h1>Green Palm – Cari rumah impian anda disini</h1>
-            <p class="lead">Hunian nyaman, strategis, dan modern di lingkungan yang hijau. Lingkungan ramah keluarga dengan fasilitas modern dan desain berkelanjutan. 🌿</p>
-            <div class="hero-ctas">
-              <a href="#clusters" class="btn primary">Lihat Tipe</a>
-              <!-- Replace whatsapp number in href with your number -->
-            <a href="https://wa.me/6282227274058?text=Hello%20Green%20Palm%2C%20apakah%20tipe%20tersebut%20masih%20tersedia" class="btn ghost" style="display:inline-flex;align-items:center;gap:8px;color:var(--green);border-color:rgba(30,139,87,0.12)">Kontak via WhatsApp</a>
-            </div>
-          </div>
-
-          <div class="hero-image">
-            <img src="{{ asset('gambar/home_page_green_palm.jpeg') }}" alt="gambar tidak tersedia"/>
+    <header class="site-header" aria-label="Main header">
+      <div class="header-inner">
+        <div class="brand">
+          <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="Green Palm logo" />
+          <div>
+            <div class="brand-title">Green Palm</div>
+            <div class="brand-sub">Asri - Modern - Terpercaya</div>
           </div>
         </div>
 
-        <!-- About -->
-        <section id="about">
-          <div class="section-head">
-            <div>
-              <h3 style="margin:0;font-family:Montserrat">Tentang kami</h3>
-              <div class="muted">Developer terpercaya yang berfokus pada hunian modern dan ramah lingkungan, menggabungkan kenyamanan dan kemudahan dalam satu kawasan.</div>
-            </div>
-    </div>    
-          <div style="display:flex;gap:18px;margin-top:16px;flex-wrap:wrap">
-            <div class="card" style="flex:1;min-width:260px">
-              <h4 style="margin:0 0 8px">Keunggulan Kami</h4>
-              <ul class="muted" style="margin:0;padding-left:18px">
-                <li>Lokasi strategis & akses transportasi yang mudah</li>
-                <li>Keamanan 24 jam</li>
-                <li>Desain yang ramah lingkungan & ruang terbuka hijau</li>
-                <li>Tempat tinggal nyaman untuk keluarga</li>
-              </ul>
-            </div>
-            <div class="card" style="flex:1;min-width:260px">
-              <h4 style="margin:0 0 8px">Mengapa anda harus memilih kami?</h4>
-              <p class="muted">Karena Green Palm menghadirkan hunian modern dengan lingkungan hijau yang asri. Kami mengutamakan keamanan, kenyamanan, dan keberlanjutan untuk keluarga yang mencari hunian jangka panjang.</p>
-            </div>
-          </div>
-        </section>
+        <nav class="site-nav" role="navigation" aria-label="Primary">
+          <a href="#about">Tentang</a>
+          <a href="#clusters">Tipe</a>
+          <a href="#facilities">Fasilitas</a>
+          <a href="#location">Lokasi</a>
+        </nav>
 
-<!-- Clusters -->
-<section id="clusters">
-  <div class="section-head">
-    <h3 style="margin:0;font-family:Montserrat">Tipe Rumah Yang Kami Miliki</h3>
-  </div>
-  <div class="muted" style="margin-top:6px">
-    Pilih tipe rumah untuk melihat denah, harga, dan ketersediaan.
-  </div>
-  <div class="muted" style="margin-top:6px">
-    Pilihan rumah
-  </div>
-
-  <div class="grid clusters" style="margin-top:16px">
-    @foreach($rumah as $r)
-    <div class="card">
-      @if($r->foto)
-        <img src="{{ asset('images/'.$r->foto) }}" alt="gambar" style="width:100%;height:260px;object-fit:cover;border-radius:10px">
-      @endif
-
-      <h4 style="margin:12px 0 6px">
-        {{ $r->nama_rumah }}
-      </h4>
-
-      <div class="muted">
-        Rp {{ number_format($r->harga,0,',','.') }}
+        <div class="header-actions">
+          <a href="https://wa.me/6282227274058?text=Halo%20Green%20Palm" class="cta-apply primary" aria-label="Hubungi via WhatsApp">Hubungi</a>
+          <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" target="_blank" class="cta-apply gold" aria-label="Download brosur">Brosur</a>
+        </div>
       </div>
+    </header>
 
-      <p class="muted" style="font-size:14px">
-        {{ $r->deskripsi }}
-      </p>
-
-      <p class="text-sm text-gray-500">
-      @if($r->tipe)
-    {{ $r->tipe->nama_tipe }}
-@else
-    -
-@endif
-      </p>
-
-<span style="
-  display:inline-block;
-  margin-top:6px;
-  padding:4px 10px;
-  border-radius:999px;
-  font-size:12px;
-  color:white;
-  background: {{ $r->status == 'Tersedia' ? '#22c55e' : '#ef4444' }};
-">
-  {{ $r->status }}
-</span>
-
-      <div style="margin-top:8px">
-        <a href="/detail/{{ $r->id }}" 
-           class="btn" 
-           style="background:transparent;color:var(--green);font-weight:700">
-           View Details
-        </a>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <span class="kicker">Hunian Nyaman & Modern</span>
+        <h1>Green Palm - Cari rumah impian anda disini</h1>
+        <p class="lead">Hunian nyaman, strategis, dan modern di lingkungan yang hijau. Lingkungan ramah keluarga dengan fasilitas modern dan desain berkelanjutan. 🌿</p>
+        <div class="hero-ctas">
+          <a href="#clusters" class="btn primary">Lihat Tipe</a>
+          <a href="https://wa.me/6282227274058?text=Hello%20Green%20Palm%2C%20apakah%20tipe%20tersebut%20masih%20tersedia" class="btn ghost">Kontak via WhatsApp</a>
+        </div>
       </div>
-    </div>
-    @endforeach
-  </div>
-</section>
+      <div class="scroll-hint">&#709;</div>
+    </section>
 
-        <!-- Facilities -->
-        <section id="facilities">
-          <div class="section-head">
-            <h3 style="margin:0;font-family:Montserrat">Facilities</h3>
+    <main>
+      <section id="about">
+        <div class="container">
+          <div class="section-title-wrap reveal">
+            <h2 class="section-title">Tentang <span class="accent">kami</span></h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">Developer terpercaya yang berfokus pada hunian modern dan ramah lingkungan, menggabungkan kenyamanan dan kemudahan dalam satu kawasan.</p>
           </div>
-          <div class="muted" style="margin-top:6px">Everything you and your family need — nearby and on-site.</div>
-          <div class="facilities" style="margin-top:16px">
-            <div class="fac card"><div style="font-size:20px;color:var(--green)">🔒</div><div><strong>24-hour Security</strong><div class="muted">Gated community & CCTV</div></div></div>
-            <div class="fac card"><div style="font-size:20px;color:var(--green)">🕌</div><div><strong>Mosque</strong><div class="muted">Community prayer facility</div></div></div>
-            <div class="fac card"><div style="font-size:20px;color:var(--green)">🌳</div><div><strong>Green Park</strong><div class="muted">Open spaces & landscaping</div></div></div>
-          </div>
-        </section>
 
-        <!-- Location -->
-        <section id="location">
-          <div class="section-head">
-            <h3 style="margin:0;font-family:Montserrat">Lokasi Kami</h3>
-            <div class="muted">Terletak di area strategis dengan akses mudah ke berbagai tujuan penting.</div>
+          <div class="feature-grid">
+            <article class="feature-card reveal">
+              <div class="feature-icon">&#128205;</div>
+              <h4>Lokasi strategis & akses transportasi yang mudah</h4>
+              <p>Mudah menjangkau area bisnis, sekolah, dan pusat kebutuhan harian.</p>
+            </article>
+            <article class="feature-card reveal">
+              <div class="feature-icon">&#128737;</div>
+              <h4>Keamanan 24 jam</h4>
+              <p>Lingkungan aman dengan pengawasan berlapis untuk kenyamanan keluarga.</p>
+            </article>
+            <article class="feature-card reveal">
+              <div class="feature-icon">&#127795;</div>
+              <h4>Desain yang ramah lingkungan & ruang terbuka hijau</h4>
+              <p>Udara lebih segar dengan tata kawasan yang hijau dan berkelanjutan.</p>
+            </article>
+            <article class="feature-card reveal">
+              <div class="feature-icon">&#10084;</div>
+              <h4>Tempat tinggal nyaman untuk keluarga</h4>
+              <p>Ruang hunian modern yang dirancang untuk aktivitas keluarga sehari-hari.</p>
+            </article>
           </div>
-          <div style="display:flex;gap:18px;margin-top:16px;flex-wrap:wrap">
-            <div style="flex:1;min-width:300px">
-              <div class="map card">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15824.168657686683!2d112.70329445!3d-7.46058765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x2dd7e12b6cd6c8bb%3A0x76ba82b7cbdf1061!2sGreen%20Palm%20Sepande%20(GPS)%20Candi%20Sidoarjo%2C%20GMPR%2B7R3%2C%20Krajan%2C%20Sepande%2C%20Kec.%20Candi%2C%20Kabupaten%20Sidoarjo%2C%20Jawa%20Timur%2061271!3m2!1d-7.4641443!2d112.691963!5e0!3m2!1sen!2sid!4v1776132739843!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                  <img src="{{ asset('gambar/home_page_green_palm.jpeg') }}" alt="Map preview of Green Palm location" style="width:100%;height:100%;object-fit:cover;border-radius:10px" loading="lazy"/>
-                </a>
+
+          <div class="card reveal" style="margin-top:22px;">
+            <h4 style="margin:0 0 8px;">Mengapa anda harus memilih kami?</h4>
+            <p class="muted" style="margin:0;">Karena Green Palm menghadirkan hunian modern dengan lingkungan hijau yang asri. Kami mengutamakan keamanan, kenyamanan, dan keberlanjutan untuk keluarga yang mencari hunian jangka panjang.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="clusters">
+        <div class="container">
+          <div class="section-top-row reveal">
+            <h3>Tipe Rumah Yang Kami <span class="accent">Miliki</span></h3>
+          </div>
+          <div class="section-divider"></div>
+          <p class="clusters-sub">Pilih tipe rumah untuk melihat denah, harga, dan ketersediaan.</p>
+          <p class="clusters-sub">Pilihan rumah</p>
+
+          <div class="grid clusters">
+            @foreach($rumah as $r)
+              <div class="card reveal">
+                @if($r->foto)
+                  <img src="{{ asset('images/'.$r->foto) }}" alt="gambar" style="width:100%;height:260px;object-fit:cover;border-radius:10px">
+                @endif
+
+                <h4 style="margin:12px 0 6px;">{{ $r->nama_rumah }}</h4>
+
+                <div class="muted">Rp {{ number_format($r->harga,0,',','.') }}</div>
+
+                <p class="muted" style="font-size:14px;">{{ $r->deskripsi }}</p>
+
+                <p class="text-sm text-gray-500">
+                  @if($r->tipe)
+                    {{ $r->tipe->nama_tipe }}
+                  @else
+                    -
+                  @endif
+                </p>
+
+                <span style="display:inline-block;margin-top:6px;padding:4px 10px;border-radius:999px;font-size:12px;color:white;background: {{ $r->status == 'Tersedia' ? '#22c55e' : '#ef4444' }};">
+                  {{ $r->status }}
+                </span>
+
+                <div style="margin-top:10px;">
+                  <a href="/detail/{{ $r->id }}" class="btn" style="background:transparent;color:var(--green);font-weight:700;padding:0;">View Details</a>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+      </section>
+
+      <section id="facilities">
+        <div class="container">
+          <div class="section-title-wrap reveal">
+            <h2 class="section-title">Facilities</h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">Everything you and your family need - nearby and on-site.</p>
+          </div>
+
+          <div class="facility-grid">
+            <div class="facility-item reveal">
+              <div class="facility-badge" style="background:#2857e3;">&#128274;</div>
+              <strong>24-hour Security</strong>
+              <div class="muted">Gated community & CCTV</div>
+            </div>
+            <div class="facility-item reveal">
+              <div class="facility-badge" style="background:#7f1be5;">&#128247;</div>
+              <strong>Mosque</strong>
+              <div class="muted">Community prayer facility</div>
+            </div>
+            <div class="facility-item reveal">
+              <div class="facility-badge" style="background:#07966a;">&#127795;</div>
+              <strong>Green Park</strong>
+              <div class="muted">Open spaces & landscaping</div>
+            </div>
+            <div class="facility-item reveal">
+              <div class="facility-badge" style="background:#e00f3b;">&#10084;</div>
+              <strong>Comfort Zone</strong>
+              <div class="muted">Family-focused living area</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="location">
+        <div class="container">
+          <div class="section-title-wrap reveal">
+            <h2 class="section-title">Lokasi <span class="accent">Kami</span></h2>
+            <div class="section-divider"></div>
+            <p class="section-desc">Terletak di area strategis dengan akses mudah ke berbagai tujuan penting.</p>
+          </div>
+
+          <div class="location-layout">
+            <div class="location-map reveal">
+              <div>
+                <div class="map-icon">&#128205;</div>
+                <h4>Green Palm Location</h4>
+                <p>Krajan, Sepande</p>
+                <p>Kota Sidoarjo, 61271</p>
+                <p>Indonesia</p>
               </div>
             </div>
-            <div style="flex:1;min-width:260px">
-              <ul class="muted" style="padding-left:18px;margin:0">
-                <li style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
-                  <div><strong>Schools:</strong> SD Islam Al Azhar 52 SIDOARJO - 1 mins</div>
-                  <a href="https://maps.app.goo.gl/tbzBKBkqnLPawyoWA" target="_blank" rel="noopener noreferrer" class="btn ghost" style="padding:8px 10px;border-radius:8px;border-color:rgba(30,139,87,0.12);color:var(--green);background:transparent;white-space:nowrap">Lihat rute</a>
-                </li>
-                <li style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
-                  <div><strong>Hospitals:</strong> RSUD R.T. Notopuro Sidoarjo - 15 mins</div>
-                  <a href="https://maps.app.goo.gl/prz1H1xQdtNBySPt8" target="_blank" rel="noopener noreferrer" class="btn ghost" style="padding:8px 10px;border-radius:8px;border-color:rgba(30,139,87,0.12);color:var(--green);background:transparent;white-space:nowrap">Lihat rute</a>
-                </li>
-                <li style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
-                  <div><strong>Supermart:</strong> Greensmart - 1 mins</div>
-                  <a href="https://maps.app.goo.gl/6G3XhTrGfLmVX6cm6" target="_blank" rel="noopener noreferrer" class="btn ghost" style="padding:8px 10px;border-radius:8px;border-color:rgba(30,139,87,0.12);color:var(--green);background:transparent;white-space:nowrap">Lihat rute</a>
-                </li>
-                <li style="display:flex;align-items:center;justify-content:space-between">
-                  <div><strong>Pintu toll:</strong> Gerbang Toll Sidoarjo - 10 mins</div>
-                  <a href="https://maps.app.goo.gl/5vKUGcmY9L4YceoS8" target="_blank" rel="noopener noreferrer" class="btn ghost" style="padding:8px 10px;border-radius:8px;border-color:rgba(30,139,87,0.12);color:var(--green);background:transparent;white-space:nowrap">Lihat rute</a>
-                </li>
-              </ul>
+
+            <div class="location-list">
+              <article class="location-item reveal">
+                <div class="location-item-icon">&#127979;</div>
+                <div class="location-item-main">
+                  <h5>Schools</h5>
+                  <ul>
+                    <li>SD Islam Al Azhar 52 SIDOARJO - 1 mins</li>
+                  </ul>
+                  <a href="https://maps.app.goo.gl/tbzBKBkqnLPawyoWA" target="_blank" rel="noopener noreferrer" class="route-link">Lihat rute</a>
+                </div>
+                <div class="distance-pill">500m - 2km</div>
+              </article>
+
+              <article class="location-item reveal">
+                <div class="location-item-icon">&#127973;</div>
+                <div class="location-item-main">
+                  <h5>Hospitals</h5>
+                  <ul>
+                    <li>RSUD R.T. Notopuro Sidoarjo - 15 mins</li>
+                  </ul>
+                  <a href="https://maps.app.goo.gl/prz1H1xQdtNBySPt8" target="_blank" rel="noopener noreferrer" class="route-link">Lihat rute</a>
+                </div>
+                <div class="distance-pill">1km - 3km</div>
+              </article>
+
+              <article class="location-item reveal">
+                <div class="location-item-icon">&#128722;</div>
+                <div class="location-item-main">
+                  <h5>Supermart</h5>
+                  <ul>
+                    <li>Greensmart - 1 mins</li>
+                  </ul>
+                  <a href="https://maps.app.goo.gl/6G3XhTrGfLmVX6cm6" target="_blank" rel="noopener noreferrer" class="route-link">Lihat rute</a>
+                </div>
+                <div class="distance-pill">1.5km</div>
+              </article>
+
+              <article class="location-item reveal">
+                <div class="location-item-icon">&#128739;</div>
+                <div class="location-item-main">
+                  <h5>Pintu toll</h5>
+                  <ul>
+                    <li>Gerbang Toll Sidoarjo - 10 mins</li>
+                  </ul>
+                  <a href="https://maps.app.goo.gl/5vKUGcmY9L4YceoS8" target="_blank" rel="noopener noreferrer" class="route-link">Lihat rute</a>
+                </div>
+                <div class="distance-pill">800m</div>
+              </article>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Promo -->
-        <section id="promo">
-          <div class="promo">
+      <section id="promo">
+        <div class="container">
+          <div class="promo reveal">
             <div>
-              <h4 style="margin:0">Penawaran Spesial</h4>
+              <h4 style="margin:0;">Penawaran Spesial</h4>
               <div class="muted">Download brosur sekarang untuk melihat detail perumahan, harga, dan promo eksklusif.</div>
             </div>
-            <div style="display:flex;gap:12px;align-items:center">
+            <div>
               <a href="{{ asset('gambar/brosur_green_palm.pdf') }}" class="callout-btn" target="_blank" download="brosur_green_palm.pdf">Get Brochure</a>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- WhatsApp CTA Banner -->
-        <section id="contact" style="margin-top:22px">
-          <div style="background:linear-gradient(90deg, rgba(30,139,87,0.06), rgba(212,175,55,0.04));padding:20px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <section id="contact" style="padding-top: 0;">
+        <div class="container">
+          <div class="contact-cta reveal">
             <div>
-              <h3 style="margin:0">Chat Green Palm Sekarang</h3>
+              <h3 style="margin:0;">Chat Green Palm Sekarang</h3>
               <div class="muted">Hubungi kami melalui WhatsApp untuk mendapat informasi lengkap dan info ketersediaan unit.</div>
             </div>
             <div>
-              <a href="https://wa.me/6282227274058?text=Hi%20Green%20Palm%2C%20apakah%20tipe%20ini%20masih%20tersedia" class="callout-btn" style="background:linear-gradient(135deg,var(--green),#27a16d);color:white">Chat on WhatsApp</a>
+              <a href="https://wa.me/6282227274058?text=Hi%20Green%20Palm%2C%20apakah%20tipe%20ini%20masih%20tersedia" class="callout-btn">Chat on WhatsApp</a>
             </div>
-          </div>
-        </section>
-
-      </main>
-
-      <footer style="background:#1a2f2a;color:#e0e7ff;padding:40px 0;width:100vw;margin-left:calc(-50vw + 50%);position:relative">
-        <div class="container" style="padding-left:28px;padding-right:28px">
-          <!-- Footer Content -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;margin-bottom:40px">
-            <!-- Brand & Description -->
-            <div>
-              <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
-                <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="Green Palm" style="width:40px;height:40px;object-fit:cover;border-radius:8px"/>
-                <div>
-                  <div style="font-weight:700;font-size:18px">Green Palm</div>
-                </div>
-              </div>
-              <p style="color:#9ca3af;margin:0 0 18px;line-height:1.6">Your trusted partner in finding the perfect tropical modern home. Quality living spaces designed for families.</p>
-              <!-- Social Links -->
-              <div style="display:flex;gap:12px">
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">f</span></a>
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">📷</span></a>
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">𝕏</span></a>
-                <a href="#" class="social-icon" style="width:40px;height:40px;border-radius:999px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;transition:all 0.3s"><span class="social-inner">in</span></a>
-              </div>
-            </div>
-
-            <!-- Quick Links -->
-            <div>
-              <h4 style="margin:0 0 18px;font-weight:700;font-size:16px">Quick Links</h4>
-              <ul style="margin:0;padding:0;list-style:none">
-                <li style="margin-bottom:10px"><a href="#" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Home</a></li>
-                <li style="margin-bottom:10px"><a href="#about" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">About Us</a></li>
-                <li style="margin-bottom:10px"><a href="#clusters" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Clusters</a></li>
-                <li style="margin-bottom:10px"><a href="#facilities" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Facilities</a></li>
-                <li style="margin-bottom:10px"><a href="#location" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Location</a></li>
-                <li style="margin-bottom:10px"><a href="#contact" class="footer-link" style="color:#d1d5db;text-decoration:none;transition:color 0.3s">Contact</a></li>
-              </ul>
-            </div>
-
-            <!-- Contact Us -->
-            <div>
-              <h4 style="margin:0 0 18px;font-weight:700;font-size:16px">Contact Us</h4>
-              <div style="margin-bottom:16px">
-                <div style="display:flex;gap:10px;align-items:flex-start">
-                  <span style="color:var(--green);margin-top:2px">📍</span>
-                  <div>
-                    <div style="color:#d1d5db">Krajan, Sepande</div>
-                    <div style="color:#d1d5db">Kota Sidoarjo, 61271</div>
-                    <div style="color:#d1d5db">Indonesia</div>
-                  </div>
-                </div>
-              </div>
-              <div style="margin-bottom:10px;display:flex;gap:10px;align-items:center">
-                <span style="color:var(--green)">📞</span>
-                <a href="tel:+62 822-2727-4058" class="footer-link" style="color:#d1d5db;text-decoration:none">+62 822-2727-4058</a>
-              </div>
-              <!-- Footer brochure & WhatsApp buttons removed as requested -->
-
-          <!-- Footer Bottom -->
-          <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-            <div style="color:#9ca3af;font-size:14px">© 2026 Green Palm. All rights reserved.</div>
-            <div style="color:#9ca3af;font-size:14px">Developed with <span style="color:var(--green)">CornerFieldClub</span> for Modern Tropical Living</div>
           </div>
         </div>
-      </footer>
-    </div>
+      </section>
+    </main>
 
-  <!-- Floating WhatsApp removed as requested -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+              <img src="{{ asset('gambar/logo_green_palm.jpeg') }}" alt="Green Palm" style="width:40px;height:40px;object-fit:cover;border-radius:8px;"/>
+              <div style="font-weight:700;font-size:18px;">Green Palm</div>
+            </div>
+            <p style="color:#9ca3af;margin:0 0 18px;line-height:1.6;">Your trusted partner in finding the perfect tropical modern home. Quality living spaces designed for families.</p>
+            <div class="socials">
+              <a href="#" class="social-icon">f</a>
+              <a href="#" class="social-icon">i</a>
+              <a href="#" class="social-icon">x</a>
+              <a href="#" class="social-icon">in</a>
+            </div>
+          </div>
+
+          <div>
+            <h4 style="margin:0 0 18px;font-weight:700;font-size:16px;">Quick Links</h4>
+            <ul style="margin:0;padding:0;list-style:none;">
+              <li style="margin-bottom:10px;"><a href="#" class="footer-link">Home</a></li>
+              <li style="margin-bottom:10px;"><a href="#about" class="footer-link">About Us</a></li>
+              <li style="margin-bottom:10px;"><a href="#clusters" class="footer-link">Clusters</a></li>
+              <li style="margin-bottom:10px;"><a href="#facilities" class="footer-link">Facilities</a></li>
+              <li style="margin-bottom:10px;"><a href="#location" class="footer-link">Location</a></li>
+              <li style="margin-bottom:10px;"><a href="#contact" class="footer-link">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style="margin:0 0 18px;font-weight:700;font-size:16px;">Contact Us</h4>
+            <div style="margin-bottom:16px;">
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <span style="color:var(--green);margin-top:2px;">&#128205;</span>
+                <div>
+                  <div style="color:#d1d5db;">Krajan, Sepande</div>
+                  <div style="color:#d1d5db;">Kota Sidoarjo, 61271</div>
+                  <div style="color:#d1d5db;">Indonesia</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-bottom:10px;display:flex;gap:10px;align-items:center;">
+              <span style="color:var(--green);">&#128222;</span>
+              <a href="tel:+62 822-2727-4058" class="footer-link">+62 822-2727-4058</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>© 2026 Green Palm. All rights reserved.</div>
+          <div>Developed with <span style="color:var(--green);">CornerFieldClub</span> for Modern Tropical Living</div>
+        </div>
+      </div>
+    </footer>
+
+    <a href="https://wa.me/6282227274058?text=Hello%20Green%20Palm%2C%20saya%20ingin%20tanya%20lebih%20lanjut" class="whatsapp-fixed" aria-label="Chat on WhatsApp">WA</a>
 
     <script>
+      (function () {
+        var header = document.querySelector('.site-header');
+        if (!header) return;
 
-      // Smooth scroll for internal links
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', e=>{
-          const href=a.getAttribute('href');
-          if(href.length>1){
-            e.preventDefault();
-            document.querySelector(href)?.scrollIntoView({behavior:'smooth',block:'start'});
+        function onScroll() {
+          if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
           }
-        })
-      });
+        }
 
-      // Reveal on scroll for cards, hero, promo, map
-      (function(){
-        const selectors=['.card','.hero-card','.promo','.map','.hero-image','.section-head'];
-        const elems=[...new Set(selectors.flatMap(s=>Array.from(document.querySelectorAll(s))))];
-        elems.forEach(el=>el.classList.add('reveal'));
-        const io=new IntersectionObserver((entries)=>{
-          entries.forEach(entry=>{
-            if(entry.isIntersecting){entry.target.classList.add('in-view');}
-          });
-        },{threshold:0.12});
-        elems.forEach(el=>io.observe(el));
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
       })();
 
-      // Hero image subtle parallax on mouse move
-      (function(){
-        const heroImage=document.querySelector('.hero-image img');
-        const heroWrap=document.querySelector('.hero-image');
-        if(heroImage && heroWrap){
-          heroWrap.addEventListener('mousemove', e=>{
-            const rect=heroWrap.getBoundingClientRect();
-            const x=(e.clientX-rect.left)/rect.width-0.5;
-            const y=(e.clientY-rect.top)/rect.height-0.5;
-            heroImage.style.transform=`translate(${x*6}px,${y*6}px) scale(1.03)`;
-          });
-          heroWrap.addEventListener('mouseleave', ()=>{heroImage.style.transform='translate(0,0) scale(1)'});
+      (function () {
+        var targets = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+        if (!targets.length || !('IntersectionObserver' in window)) {
+          targets.forEach(function (el) { el.classList.add('in-view'); });
+          return;
         }
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        targets.forEach(function (el) { io.observe(el); });
       })();
-
-      // Typewriter headline (non-blocking)
-      (function(){
-        const h1=document.querySelector('h1');
-        if(!h1) return;
-        const original=h1.textContent.trim();
-        const parts=original.split('–');
-        if(parts.length<2) return; // expect format Title – Subtitle
-        const title=parts[0].trim()+ ' – ';
-        const subtitle=parts.slice(1).join('–').trim();
-        h1.textContent='';
-        const span=document.createElement('span');
-        span.className='typewriter';
-        h1.appendChild(document.createTextNode(title));
-        h1.appendChild(span);
-        let i=0;
-        const speed=35;
-        function type(){
-          if(i<=subtitle.length){span.textContent=subtitle.slice(0,i);i++;setTimeout(type,speed);} else {span.style.borderRight='none'}
-        }
-        setTimeout(type,600);
-      })();
-
-      // Floating WhatsApp pulse (gentle)
-      (function(){
-        const w=document.querySelector('.whatsapp-fixed');
-        if(!w) return;
-        setTimeout(()=>w.classList.add('pulse'),1200);
-        w.addEventListener('mouseenter', ()=>w.classList.remove('pulse'));
-        w.addEventListener('mouseleave', ()=>w.classList.add('pulse'));
-      })();
-
-      // ===== Footer Interactive Effects =====
-      document.addEventListener('DOMContentLoaded', function() {
-        
-        // 1. Smooth scroll untuk footer links
-        const footerLinks = document.querySelectorAll('footer a[href^="#"]');
-        const quickLinks = document.querySelectorAll('footer .footer-link[href^="#"]');
-        footerLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-
-            if (href === '#') {
-              e.preventDefault();
-            }
-
-            if (this.classList.contains('footer-link')) {
-              quickLinks.forEach(item => item.classList.remove('is-active'));
-              this.classList.add('is-active');
-            }
-
-            if (href !== '#') {
-              e.preventDefault();
-              const target = document.querySelector(href);
-              if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }
-          });
-        });
-
-        // 2. Add hover class ke footer links (tanpa ripple agar tidak muncul blok)
-        const allFooterLinks = document.querySelectorAll('footer a');
-        allFooterLinks.forEach(link => {
-          link.addEventListener('mouseenter', function() {
-            this.classList.add('footer-link');
-          });
-        });
-
-        // 3. Social media icons animation
-        const socialIcons = document.querySelectorAll('footer .social-icon');
-        socialIcons.forEach((icon, index) => {
-          icon.addEventListener('mouseenter', function() {
-            // Ensure the icon is visible before playing bounce (fix for disappearing icons)
-            this.style.animation = 'none';
-            this.style.opacity = '1';
-            const inner = this.querySelector('.social-inner');
-            if(inner){ inner.style.opacity = '1'; inner.style.color = 'white'; }
-            setTimeout(() => {
-              this.style.animation = `bounce 0.6s ease`;
-            }, 10);
-            createRipple(this, {
-              clientX: this.getBoundingClientRect().left + this.offsetWidth / 2,
-              clientY: this.getBoundingClientRect().top + this.offsetHeight / 2
-            });
-          });
-
-          icon.addEventListener('click', function(e) {
-            if (this.getAttribute('href') === '#') {
-              e.preventDefault();
-            }
-            socialIcons.forEach(item => item.classList.remove('is-active'));
-            this.classList.add('is-active');
-          });
-
-          // Stagger animation on page load (do not hard-set opacity here to avoid hiding)
-          icon.style.opacity = '';
-          icon.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s forwards`;
-        });
-
-        // 4. Footer sections fade-in animation
-        const footerSections = document.querySelectorAll('footer > .container > div:first-child > div');
-        footerSections.forEach((section, index) => {
-          section.style.opacity = '0';
-          section.style.animation = `fadeInUp 0.6s ease ${index * 0.2}s forwards`;
-        });
-
-        function createRipple(element, event) {
-          const ripple = document.createElement('span');
-          const rect = element.getBoundingClientRect();
-          const size = Math.max(rect.width, rect.height);
-          
-          ripple.style.width = ripple.style.height = size + 'px';
-          ripple.style.left = event.clientX - rect.left - size / 2 + 'px';
-          ripple.style.top = event.clientY - rect.top - size / 2 + 'px';
-          ripple.classList.add('ripple');
-          element.appendChild(ripple);
-          
-          // Remove ripple after animation
-          ripple.addEventListener('animationend', () => ripple.remove());
-        }
-
-        // 5. Footer contact info copy to clipboard
-        const contactInfo = document.querySelectorAll('footer a[href^="tel:"], footer a[href^="mailto:"]');
-        contactInfo.forEach(info => {
-          info.addEventListener('click', function(e) {
-            const text = this.textContent.trim();
-            e.preventDefault();
-            
-            // Show feedback
-            const originalText = this.textContent;
-            this.textContent = 'Copied!';
-            setTimeout(() => {
-              this.textContent = originalText;
-            }, 2000);
-
-            // Copy ke clipboard
-            navigator.clipboard.writeText(text).catch(err => console.log('Copy error:', err));
-            
-            // Actual navigation
-            setTimeout(() => {
-              window.location.href = this.href;
-            }, 500);
-          });
-        });
-
-        // 6. WhatsApp button pulse animation
-        const whatsappBtn = document.querySelector('.whatsapp-fixed');
-        if (whatsappBtn) {
-          whatsappBtn.style.animation = 'pulse 2s infinite';
-        }
-      });
-
-      // CSS Animations
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-8px); }
-        }
-
-        @keyframes pulse {
-          0%, 100% {
-            box-shadow: 0 12px 30px rgba(30,139,87,0.12);
-          }
-          50% {
-            box-shadow: 0 12px 40px rgba(30,139,87,0.3);
-          }
-        }
-
-        @keyframes ripple {
-          from {
-            opacity: 1;
-            transform: scale(0);
-          }
-          to {
-            opacity: 0;
-            transform: scale(4);
-          }
-        }
-
-        .ripple {
-          position: absolute;
-          background: rgba(30, 139, 87, 0.6);
-          border-radius: 50%;
-          transform: scale(0);
-          animation: ripple 0.6s ease-out;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        footer .social-icon {
-          position: relative;
-          overflow: hidden;
-          display:inline-flex;align-items:center;justify-content:center;
-        }
-
-        /* Inner wrapper scales while ripple stays visually behind */
-  footer .social-icon .social-inner{display:inline-block;transform:scale(1);transition:transform .18s ease,color .18s ease;position:relative;z-index:3;font-size:16px;color:inherit;line-height:1}
-  footer .social-icon:hover .social-inner{transform:scale(1.28)}
-  footer .social-icon .ripple{z-index:0}
-
-        /* Mobile optimize */
-        @media (max-width: 768px) {
-          footer > .container > div:first-child {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `;
-      document.head.appendChild(style);
     </script>
-      <script>
-        // Toggle header scrolled class based on scroll position
-        (function(){
-          var header = document.querySelector('header.site-header');
-          if(!header) return;
-          function onScroll(){
-            if(window.scrollY > 24) header.classList.add('scrolled'); else header.classList.remove('scrolled');
-          }
-          onScroll();
-          window.addEventListener('scroll', onScroll, {passive:true});
-        })();
-      </script>
-
   </body>
 </html>
