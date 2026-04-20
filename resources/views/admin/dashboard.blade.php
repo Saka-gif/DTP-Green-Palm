@@ -1,91 +1,116 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="space-y-8">
+<div class="space-y-8 pb-10">
+    {{-- Notifikasi Sukses --}}
+    @if(session('success'))
+        <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-2xl shadow-sm animate-fade-in">
+            <svg xmlns="http://w3.org" class="h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-medium">{{ session('success') }}</span>
+        </div>
+    @endif
+
+    {{-- Header --}}
     <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.32em] text-emerald-700">Admin Dashboard</p>
-            <h1 class="mt-3 text-3xl font-bold tracking-tight text-slate-950">Kelola Rumah & Tipe Rumah</h1>
-            <p class="mt-2 text-sm text-slate-600 max-w-2xl">Semua data rumah dan tipe tampil terstruktur di satu dashboard. Edit, hapus, dan tambah langsung dari halaman admin.</p>
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-emerald-600">Admin Dashboard</p>
+            <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">Kelola Properti</h1>
+            <p class="mt-2 text-sm text-slate-500 max-w-xl">Manajemen unit rumah dan kategori tipe dalam satu panel kendali terpusat.</p>
         </div>
         <div class="flex flex-wrap gap-3">
-            <a href="/rumah/create" class="inline-flex items-center justify-center rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800">Tambah Rumah</a>
-            <a href="/tiperumah/create" class="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800">Tambah Tipe</a>
+            <a href="{{ url('/rumah/create') }}" class="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Tambah Rumah
+            </a>
+            <a href="{{ url('/tiperumah/create') }}" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                Tambah Tipe
+            </a>
         </div>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-3">
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-sm font-semibold text-slate-500">Total Rumah</p>
-            <p class="mt-4 text-3xl font-bold text-slate-900">{{ $stats['totalRumah'] }}</p>
-            <p class="mt-2 text-sm text-slate-500">Jumlah total unit yang bisa dikelola.</p>
-        </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-sm font-semibold text-slate-500">Tipe Rumah</p>
-            <p class="mt-4 text-3xl font-bold text-slate-900">{{ $stats['totalTipe'] }}</p>
-            <p class="mt-2 text-sm text-slate-500">Jumlah kategori tipe rumah.</p>
-        </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-sm font-semibold text-slate-500">Status Tersedia</p>
-            <p class="mt-4 text-3xl font-bold text-emerald-700">{{ $stats['tersedia'] }}</p>
-            <p class="mt-2 text-sm text-slate-500">Unit yang saat ini berstatus tersedia.</p>
-        </div>
-    </div>
+    {{-- Stats Grid --}}
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        @php
+            $statCards = [
+                ['label' => 'Total Rumah', 'value' => $stats['totalRumah'], 'desc' => 'Unit terdaftar', 'color' => 'text-slate-900'],
+                ['label' => 'Tipe Rumah', 'value' => $stats['totalTipe'], 'desc' => 'Kategori tersedia', 'color' => 'text-slate-900'],
+                ['label' => 'Status Tersedia', 'value' => $stats['tersedia'], 'desc' => 'Siap huni/jual', 'color' => 'text-emerald-600'],
+            ];
+        @endphp
 
-    <div class="grid gap-6">
-        <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div>
-                    <h2 class="text-xl font-semibold text-slate-900">Data Rumah</h2>
-                    <p class="mt-1 text-sm text-slate-500">Lihat semua rumah, edit data, atau hapus unit yang sudah tidak aktif.</p>
+        @foreach($statCards as $card)
+            <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-hover hover:shadow-md">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400">{{ $card['label'] }}</p>
+                <div class="mt-4 flex items-baseline gap-2">
+                    <p class="text-4xl font-black {{ $card['color'] }}">{{ $card['value'] }}</p>
+                    <p class="text-xs font-medium text-slate-400">{{ $card['desc'] }}</p>
                 </div>
-                <span class="rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-800">{{ $stats['totalRumah'] }} units</span>
             </div>
+        @endforeach
+    </div>
 
-            <div class="mt-6 overflow-x-auto">
-                <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
-                    <thead class="bg-slate-50">
+    {{-- Tables Section --}}
+    <div class="grid gap-8">
+        
+        {{-- Table Rumah --}}
+        <section class="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+            <div class="flex items-center justify-between border-b border-slate-100 p-6">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Daftar Unit Rumah</h2>
+                    <p class="text-xs text-slate-500">Total {{ $stats['totalRumah'] }} unit ditemukan</p>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-50/50 text-xs uppercase tracking-wider text-slate-500">
                         <tr>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Nama Rumah</th>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Tipe</th>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Harga</th>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Status</th>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Aksi</th>
+                            <th class="px-6 py-4 font-semibold">Informasi Rumah</th>
+                            <th class="px-6 py-4 font-semibold">Tipe</th>
+                            <th class="px-6 py-4 font-semibold">Harga</th>
+                            <th class="px-6 py-4 font-semibold">Status</th>
+                            <th class="px-6 py-4 font-semibold text-right">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-200 bg-white">
+                    <tbody class="divide-y divide-slate-100">
                         @forelse($rumah as $item)
-                        <tr>
-                            <td class="px-4 py-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="h-12 w-16 overflow-hidden rounded-2xl bg-slate-100">
-                                        <img src="{{ $item->foto ? asset('images/' . $item->foto) : asset('gambar/home_page_green_palm.jpeg') }}" alt="{{ $item->nama_rumah }}" class="h-full w-full object-cover" />
-                                    </div>
+                        <tr class="hover:bg-slate-50/50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-4">
+                                    <img src="{{ $item->foto ? asset('images/' . $item->foto) : asset('gambar/default-home.jpg') }}" 
+                                         class="h-12 w-16 rounded-xl object-cover bg-slate-100 shadow-sm" />
                                     <div>
-                                        <p class="font-semibold text-slate-900">{{ $item->nama_rumah }}</p>
-                                        <p class="text-xs text-slate-500">{{ $item->lokasi }}</p>
+                                        <p class="font-bold text-slate-900">{{ $item->nama_rumah }}</p>
+                                        <p class="text-xs text-slate-500"><i class="fas fa-map-marker-alt mr-1"></i>{{ $item->lokasi }}</p>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-4 text-slate-700">{{ $item->tipe->nama_tipe ?? '-' }}</td>
-                            <td class="px-4 py-4 text-slate-700">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
-                            <td class="px-4 py-4">
-                                <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold {{ strtolower($item->status) === 'tersedia' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800' }}">{{ $item->status }}</span>
+                            <td class="px-6 py-4 font-medium text-slate-600">{{ $item->tipe->nama_tipe ?? '-' }}</td>
+                            <td class="px-6 py-4 font-bold text-slate-900">Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold {{ strtolower($item->status) === 'tersedia' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }}">
+                                    <span class="mr-1.5 h-1.5 w-1.5 rounded-full {{ strtolower($item->status) === 'tersedia' ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
+                                    {{ ucfirst($item->status) }}
+                                </span>
                             </td>
-                            <td class="px-4 py-4">
-                                <div class="flex flex-wrap gap-2">
-                                    <a href="/rumah/edit/{{ $item->id }}" class="rounded-full bg-yellow-400 px-3 py-1 text-xs font-semibold text-slate-900">Edit</a>
-                                    <form action="/rumah/delete/{{ $item->id }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="rounded-full bg-rose-500 px-3 py-1 text-xs font-semibold text-white">Hapus</button>
+                            <td class="px-6 py-4 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <a href="/rumah/edit/{{ $item->id }}" class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-600 hover:bg-yellow-400 hover:text-white transition-all shadow-sm">
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                                    </a>
+                                    <form action="/rumah/delete/{{ $item->id }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus rumah ini?')">
+                                        @csrf @method('DELETE')
+                                        <button class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                        </button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="5" class="px-4 py-8 text-center text-sm text-slate-500">Tidak ada data rumah.</td>
+                            <td colspan="5" class="px-6 py-12 text-center text-slate-400 italic">Belum ada data rumah yang tersedia.</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -93,43 +118,45 @@
             </div>
         </section>
 
-        <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        {{-- Table Tipe Rumah --}}
+        <section class="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+            <div class="flex items-center justify-between border-b border-slate-100 p-6">
                 <div>
-                    <h2 class="text-xl font-semibold text-slate-900">Data Tipe Rumah</h2>
-                    <p class="mt-1 text-sm text-slate-500">Kelola semua tipe rumah yang tersedia di platform.</p>
+                    <h2 class="text-lg font-bold text-slate-900">Kategori Tipe</h2>
+                    <p class="text-xs text-slate-500">Terdapat {{ $stats['totalTipe'] }} kategori aktif</p>
                 </div>
-                <span class="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">{{ $stats['totalTipe'] }} tipe</span>
             </div>
-
-            <div class="mt-6 overflow-x-auto">
-                <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
-                    <thead class="bg-slate-50">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-50/50 text-xs uppercase tracking-wider text-slate-500">
                         <tr>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Nama Tipe</th>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Deskripsi</th>
-                            <th class="px-4 py-3 font-semibold text-slate-600">Aksi</th>
+                            <th class="px-6 py-4 font-semibold">Nama Tipe</th>
+                            <th class="px-6 py-4 font-semibold">Deskripsi Singkat</th>
+                            <th class="px-6 py-4 font-semibold text-right">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-200 bg-white">
+                    <tbody class="divide-y divide-slate-100">
                         @forelse($tipeRumah as $tipe)
-                        <tr>
-                            <td class="px-4 py-4 font-semibold text-slate-900">{{ $tipe->nama_tipe }}</td>
-                            <td class="px-4 py-4 text-slate-700">{{ Str::limit($tipe->deskripsi, 70, '...') }}</td>
-                            <td class="px-4 py-4">
-                                <div class="flex flex-wrap gap-2">
-                                    <a href="/tiperumah/{{ $tipe->id }}/edit" class="rounded-full bg-yellow-400 px-3 py-1 text-xs font-semibold text-slate-900">Edit</a>
-                                    <form action="/tiperumah/{{ $tipe->id }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="rounded-full bg-rose-500 px-3 py-1 text-xs font-semibold text-white">Hapus</button>
+                        <tr class="hover:bg-slate-50/50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-slate-900">{{ $tipe->nama_tipe }}</td>
+                            <td class="px-6 py-4 text-slate-500 leading-relaxed">{{ Str::limit($tipe->deskripsi, 80) }}</td>
+                            <td class="px-6 py-4 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <a href="/tiperumah/{{ $tipe->id }}/edit" class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-600 hover:bg-yellow-400 hover:text-white transition-all shadow-sm">
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                                    </a>
+                                    <form action="/tiperumah/{{ $tipe->id }}" method="POST" onsubmit="return confirm('Menghapus tipe akan berdampak pada data rumah terkait. Lanjutkan?')">
+                                        @csrf @method('DELETE')
+                                        <button class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                        </button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" class="px-4 py-8 text-center text-sm text-slate-500">Tidak ada data tipe rumah.</td>
+                            <td colspan="3" class="px-6 py-12 text-center text-slate-400 italic">Belum ada kategori tipe.</td>
                         </tr>
                         @endforelse
                     </tbody>

@@ -21,7 +21,8 @@ class TipeRumahController extends Controller
     public function store(Request $request)
     {
         TipeRumah::create($request->all());
-        return redirect('/tiperumah');
+    return redirect()->route('admin.dashboard')
+    ->with('success', 'Tipe rumah berhasil ditambahkan');
     }
 
 public function edit($id)
@@ -39,7 +40,8 @@ public function update(Request $request, $id)
         'deskripsi' => $request->deskripsi
     ]);
 
-    return redirect('/tiperumah')->with('success', 'Data berhasil diupdate');
+   return redirect()->route('admin.dashboard')
+    ->with('success', 'Tipe rumah berhasil diupdate');
 }
 
 public function destroy($id)
@@ -47,6 +49,7 @@ public function destroy($id)
     $tipe = TipeRumah::findOrFail($id);
     $tipe->delete();
 
-    return redirect('/admin.dashboard');
+return redirect()->route('admin.dashboard')
+    ->with('success', 'Tipe rumah berhasil dihapus');
 }
 }
