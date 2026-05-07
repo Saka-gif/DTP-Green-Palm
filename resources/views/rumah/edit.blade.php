@@ -18,19 +18,19 @@
 
     <img src="{{ asset('images/'.$rumah->foto) }}" width="100" class="mb-3">
 
-    <input type="text" name="nama_rumah" value="{{ $rumah->nama_rumah }}"
+    <input type="text" name="nama_rumah" value="{{ $rumah->nama_rumah }}" placeholder="Nama Rumah"
         class="w-full border p-2 mb-3 rounded">
 
-    <input type="number" name="harga" value="{{ $rumah->harga }}"
+    <input type="number" name="harga" value="{{ $rumah->harga }}" placeholder="Harga Rumah"
         class="w-full border p-2 mb-3 rounded">
 
-    <input type="text" name="lokasi" value="{{ $rumah->lokasi }}"
+    <input type="text" name="lokasi" value="{{ $rumah->lokasi }}"placeholder="Lokasi Rumah"
         class="w-full border p-2 mb-3 rounded">
 
-    <input type="text" name="status" value="{{ $rumah->status }}"
+    <input type="text" name="status" value="{{ $rumah->status }}" placeholder="Status Rumah (Tersedia/Sold Out)"
         class="w-full border p-2 mb-3 rounded">
 
-    <textarea name="deskripsi" class="w-full border p-2 mb-3 rounded">
+    <textarea name="deskripsi" class="w-full border p-2 mb-3 rounded" placeholder="Deskripsi Rumah">
     {{ $rumah->deskripsi }}
 </textarea>
 
