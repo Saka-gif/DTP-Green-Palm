@@ -18,6 +18,7 @@ class Rumah extends Model
         'status',
         'deskripsi',
         'foto',
+        'denah',
         'tipe_id',
         'luas_tanah',
         'luas_bangunan',

@@ -35,16 +35,24 @@ class RumahController extends Controller
         'kamar_mandi' => 'nullable|numeric',
         'lantai' => 'nullable|numeric',
         'carport' => 'nullable|numeric',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'denah' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
 
-    $data = $request->except('foto');
+    $data = $request->except('foto', 'denah');
 
     if ($request->hasFile('foto')) {
         $file = $request->file('foto');
         $filename = time().'.'.$file->getClientOriginalExtension();
         $file->move(public_path('images'), $filename);
         $data['foto'] = $filename;
+    }
+
+    if ($request->hasFile('denah')) {
+        $file = $request->file('denah');
+        $filename = time().'_denah.'.$file->getClientOriginalExtension();
+        $file->move(public_path('images'), $filename);
+        $data['denah'] = $filename;
     }
         Rumah::create($data);
 
@@ -77,10 +85,11 @@ class RumahController extends Controller
             'lantai' => 'nullable|numeric',
             'carport' => 'nullable|numeric',
 
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'denah' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $data = $request->except('foto');
+        $data = $request->except('foto', 'denah');
 
         if ($request->hasFile('foto')) {
             if ($rumah->foto && file_exists(public_path('images/' . $rumah->foto))) {
@@ -91,6 +100,17 @@ class RumahController extends Controller
             $filename = time().'.'.$file->getClientOriginalExtension();
             $file->move(public_path('images'), $filename);
             $data['foto'] = $filename;
+        }
+
+        if ($request->hasFile('denah')) {
+            if ($rumah->denah && file_exists(public_path('images/' . $rumah->denah))) {
+                unlink(public_path('images/' . $rumah->denah));
+            }
+
+            $file = $request->file('denah');
+            $filename = time().'_denah.'.$file->getClientOriginalExtension();
+            $file->move(public_path('images'), $filename);
+            $data['denah'] = $filename;
         }
 
         $rumah->update($data);
@@ -105,6 +125,10 @@ class RumahController extends Controller
 
     if ($rumah->foto && file_exists(public_path('images/' . $rumah->foto))) {
         unlink(public_path('images/' . $rumah->foto));
+    }
+
+    if ($rumah->denah && file_exists(public_path('images/' . $rumah->denah))) {
+        unlink(public_path('images/' . $rumah->denah));
     }
 
     $rumah->delete();

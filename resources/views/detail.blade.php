@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     @php
         $fotoRumah = $rumah->foto ? asset('images/' . $rumah->foto) : asset('gambar/home_page_green_palm.jpeg');
-        $statusClass = strtolower((string) $rumah->status) === 'tersedia' ? 'available' : '';
+        $denahRumah = $rumah->denah ? asset('images/' . $rumah->denah) : $fotoRumah;
+        $statusClass = strtolower((string) $rumah->status) === 'tersedia' ? 'available' : 'unavailable';
         $profileKey = strtolower(trim(($rumah->tipe->nama_tipe ?? '') . ' ' . ($rumah->nama_rumah ?? '')));
 
         $presetSpesifikasi = [
@@ -309,18 +310,32 @@
         }
 
         .badge {
-            font-size: 13px;
-            border-radius: 999px;
-            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            padding: 6px 12px;
             background: #e9efec;
             color: #143328;
-            border: 1px solid #d2dbd5;
+            border: none;
+            letter-spacing: 0.3px;
+        }
+
+        .badge.type {
+            background: linear-gradient(135deg, #8b5e34 0%, #c58b48 52%, #d8b36a 100%);
+            color: #fff8e8;
+            box-shadow: 0 4px 12px rgba(139, 94, 52, 0.22);
         }
 
         .badge.available {
-            background: rgba(16, 185, 129, 0.13);
-            color: #057a55;
-            border-color: rgba(16, 185, 129, 0.35);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .badge.unavailable {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
         }
 
         .spec-block {
@@ -348,6 +363,90 @@
             object-fit: cover;
             border: 1px solid var(--line);
             border-radius: 2px;
+            cursor: pointer;
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .thumb:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: 8px;
+            overflow: auto;
+            animation: slideIn 0.3s ease;
+            padding: 50px 20px 20px 20px;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            max-width: 100%;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .accordion {
@@ -549,16 +648,17 @@
                 </p>
 
                 <img class="main-photo" src="{{ $fotoRumah }}" alt="Foto utama {{ $rumah->nama_rumah }}">
-
-                <div class="badges">
-                    <span class="badge">Rp {{ number_format($rumah->harga, 0, ',', '.') }}</span>
-                    <span class="badge">{{ $rumah->tipe->nama_tipe ?? 'Tipe -' }}</span>
-                    <span class="badge {{ $statusClass }}">{{ $rumah->status ?? 'Status -' }}</span>
-                </div>
             </div>
 
             <aside class="stats-card">
-                <p>Luas Tanah: {{ $rumah->luas_tanah ?? '-' }}, Luas Bangunan: {{ $rumah->luas_bangunan ?? '-' }}</p>
+                <p style="margin-bottom: 16px;">Rp {{ number_format($rumah->harga, 0, ',', '.') }}</p>
+                <div class="badges" style="margin: 0 -2px; gap: 8px;">
+                    <span class="badge type">{{ $rumah->tipe->nama_tipe ?? 'Tipe -' }}</span>
+                    <span class="badge {{ $statusClass }}">{{ $rumah->status ?? 'Status -' }}</span>
+                </div>
+                <hr class="stats-divider">
+                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); margin: 0 0 12px 0;">Luas Tanah: {{ $rumah->luas_tanah ?? '-' }}</p>
+                <p style="font-size: 16px; color: rgba(255, 255, 255, 0.9); margin: 0 0 16px 0;">Luas Bangunan: {{ $rumah->luas_bangunan ?? '-' }}</p>
                 <hr class="stats-divider">
                 <ul class="metric-list">
                     <li class="metric-item"><span class="dot"></span> {{ $rumah->lantai ?? '1' }} Lantai</li>
@@ -579,8 +679,7 @@
 
             <div class="spec-grid">
                 <div class="thumb-wrap">
-                    <img class="thumb" src="{{ $fotoRumah }}" alt="Denah 1 {{ $rumah->nama_rumah }}">
-                    <img class="thumb" src="{{ $fotoRumah }}" alt="Denah 2 {{ $rumah->nama_rumah }}">
+                    <img class="thumb" src="{{ $denahRumah }}" alt="Denah {{ $rumah->nama_rumah }}" onclick="openModal(this.src)">
                 </div>
 
                 <div class="accordion">
@@ -594,5 +693,43 @@
             </div>
         </section>
     </main>
+
+    <!-- Modal untuk galeri foto -->
+    <div id="imageModal" class="modal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = src;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeModalOnBackdrop(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Tutup modal dengan tombol ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>

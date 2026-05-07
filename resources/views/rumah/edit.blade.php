@@ -14,9 +14,37 @@
     <form action="/rumah/update/{{ $rumah->id }}" method="POST" enctype="multipart/form-data">
     @csrf
 
-    <input type="file" name="foto" class="mb-3">
+    <label class="block mb-2 text-sm font-medium text-gray-700">Foto Rumah</label>
+    <input type="file" name="foto" id="fotoRumah" class="hidden" onchange="updateFileName(this, 'fotoRumahText')">
+    <div class="flex items-center gap-3 mb-3">
+        <label for="fotoRumah" class="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700">
+            Ganti Foto Rumah
+        </label>
+        <span id="fotoRumahText" class="text-sm text-gray-500">
+            {{ $rumah->foto ? $rumah->foto : 'Belum ada foto rumah dipilih' }}
+        </span>
+    </div>
 
-    <img src="{{ asset('images/'.$rumah->foto) }}" width="100" class="mb-3">
+    @if($rumah->foto)
+        <img src="{{ asset('images/'.$rumah->foto) }}" width="100" class="mb-3 rounded">
+    @endif
+
+    <label class="block mb-2 text-sm font-medium text-gray-700">Denah Rumah</label>
+    <input type="file" name="denah" id="denahRumah" class="hidden" onchange="updateFileName(this, 'denahRumahText')">
+    <div class="flex items-center gap-3 mb-3">
+        <label for="denahRumah" class="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700">
+            Ganti Denah Rumah
+        </label>
+        <span id="denahRumahText" class="text-sm text-gray-500">
+            {{ $rumah->denah ? $rumah->denah : 'Belum ada denah rumah dipilih' }}
+        </span>
+    </div>
+
+    @if($rumah->denah)
+        <img src="{{ asset('images/'.$rumah->denah) }}" width="100" class="mb-3 rounded">
+    @endif
+
+    <p class="text-xs text-gray-500 mb-3">Foto rumah ditampilkan di halaman utama, denah dipakai di bagian specifications.</p>
 
     <input type="text" name="nama_rumah" value="{{ $rumah->nama_rumah }}" placeholder="Nama Rumah"
         class="w-full border p-2 mb-3 rounded">
@@ -68,6 +96,13 @@
 </form>
 
 </div>
+
+<script>
+    function updateFileName(input, targetId) {
+        const target = document.getElementById(targetId);
+        target.textContent = input.files.length ? input.files[0].name : 'Belum ada file dipilih';
+    }
+</script>
 
 </body>
 </html>
