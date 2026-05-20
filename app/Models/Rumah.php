@@ -18,7 +18,9 @@ class Rumah extends Model
         'status',
         'deskripsi',
         'foto',
+        'foto_public_id',
         'denah',
+        'denah_public_id',
         'tipe_id',
         'luas_tanah',
         'luas_bangunan',
@@ -27,6 +29,30 @@ class Rumah extends Model
         'lantai',
         'carport',
     ];
+
+
+public function getFotoUrlAttribute(): ?string
+{
+    return $this->resolveMediaUrl($this->foto);
+}
+
+public function getDenahUrlAttribute(): ?string
+{
+    return $this->resolveMediaUrl($this->denah);
+}
+
+private function resolveMediaUrl(?string $value): ?string
+{
+    if (! $value) {
+        return null;
+    }
+
+    if (str_starts_with($value, 'http://') || str_starts_with($value, 'https://')) {
+        return $value;
+    }
+
+    return asset('images/' . $value);
+}
 
 
 public function tipe()

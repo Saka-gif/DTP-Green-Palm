@@ -78,7 +78,7 @@
                         <tr class="hover:bg-slate-50/50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-4">
-                                    <img src="{{ $item->foto ? asset('images/' . $item->foto) : asset('gambar/default-home.jpg') }}" 
+                                    <img src="{{ $item->foto_url ?: asset('gambar/default-home.jpg') }}" 
                                          class="h-12 w-16 rounded-xl object-cover bg-slate-100 shadow-sm" />
                                     <div>
                                         <p class="font-bold text-slate-900">{{ $item->nama_rumah }}</p>

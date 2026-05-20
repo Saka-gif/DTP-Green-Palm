@@ -11,6 +11,24 @@
 
 <h1 class="text-xl font-bold text-green-800 mb-4">Edit Rumah</h1>
 
+@if ($errors->any())
+    <div class="bg-red-100 border border-red-400 text-red-700 p-4 mb-4 rounded">
+        <p class="font-bold mb-2">Terjadi kesalahan:</p>
+        <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if ($message = Session::get('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 p-4 mb-4 rounded">
+        <p class="font-bold">Error:</p>
+        <p>{{ $message }}</p>
+    </div>
+@endif
+
     <form action="/rumah/update/{{ $rumah->id }}" method="POST" enctype="multipart/form-data">
     @csrf
 
@@ -21,12 +39,12 @@
             Ganti Foto Rumah
         </label>
         <span id="fotoRumahText" class="text-sm text-gray-500">
-            {{ $rumah->foto ? $rumah->foto : 'Belum ada foto rumah dipilih' }}
+            {{ $rumah->foto ? 'Foto rumah saat ini tersedia' : 'Belum ada foto rumah dipilih' }}
         </span>
     </div>
 
     @if($rumah->foto)
-        <img src="{{ asset('images/'.$rumah->foto) }}" width="100" class="mb-3 rounded">
+        <img src="{{ $rumah->foto_url }}" width="100" class="mb-3 rounded">
     @endif
 
     <label class="block mb-2 text-sm font-medium text-gray-700">Denah Rumah</label>
@@ -36,12 +54,12 @@
             Ganti Denah Rumah
         </label>
         <span id="denahRumahText" class="text-sm text-gray-500">
-            {{ $rumah->denah ? $rumah->denah : 'Belum ada denah rumah dipilih' }}
+            {{ $rumah->denah ? 'Denah rumah saat ini tersedia' : 'Belum ada denah rumah dipilih' }}
         </span>
     </div>
 
     @if($rumah->denah)
-        <img src="{{ asset('images/'.$rumah->denah) }}" width="100" class="mb-3 rounded">
+        <img src="{{ $rumah->denah_url }}" width="100" class="mb-3 rounded">
     @endif
 
     <p class="text-xs text-gray-500 mb-3">Foto rumah ditampilkan di halaman utama, denah dipakai di bagian specifications.</p>

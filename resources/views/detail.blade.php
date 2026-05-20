@@ -8,8 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     @php
-        $fotoRumah = $rumah->foto ? asset('images/' . $rumah->foto) : asset('gambar/home_page_green_palm.jpeg');
-        $denahRumah = $rumah->denah ? asset('images/' . $rumah->denah) : $fotoRumah;
+        $fotoRumah = $rumah->foto_url ?: asset('gambar/home_page_green_palm.jpeg');
+        $denahRumah = $rumah->denah_url ?: $fotoRumah;
         $statusClass = strtolower((string) $rumah->status) === 'tersedia' ? 'available' : 'unavailable';
         $profileKey = strtolower(trim(($rumah->tipe->nama_tipe ?? '') . ' ' . ($rumah->nama_rumah ?? '')));
 

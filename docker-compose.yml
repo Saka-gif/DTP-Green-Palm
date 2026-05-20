@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=base64:qJBpyR6OVOBpVLDo0xJZrUJCHFcnCgLdR0gAYRiBtFQ=
+      - APP_URL=http://localhost:8080
+      
+      # Database
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=green_palm
+      - DB_USERNAME=root
+      - DB_PASSWORD=password
+      
+      # Cloudinary (gunakan env variable dari .env)
+      - CLOUDINARY_URL=${CLOUDINARY_URL}
+      - CLOUDINARY_KEY=${CLOUDINARY_KEY}
+      - CLOUDINARY_SECRET=${CLOUDINARY_SECRET}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_UPLOAD_PRESET=${CLOUDINARY_UPLOAD_PRESET}
+      
+      # Cache & Session
+      - CACHE_DRIVER=array
+      - SESSION_DRIVER=cookie
+      - QUEUE_CONNECTION=sync
+    
+    depends_on:
+      - mysql
+    
+    volumes:
+      - .:/app
+      - /app/vendor
+      - /app/node_modules
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=green_palm
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  mysql_data:

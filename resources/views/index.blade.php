@@ -900,7 +900,7 @@
             @foreach($rumah as $r)
               <div class="card reveal">
                 @if($r->foto)
-                  <img src="{{ asset('images/'.$r->foto) }}" alt="gambar" style="width:100%;height:260px;object-fit:cover;border-radius:10px">
+                  <img src="{{ $r->foto_url }}" alt="gambar" style="width:100%;height:260px;object-fit:cover;border-radius:10px">
                 @endif
 
                 <h4 style="margin:12px 0 6px;">{{ $r->nama_rumah }}</h4>

@@ -10,10 +10,20 @@
 <h1 class="text-xl font-bold text-green-800 mb-4">Tambah Rumah</h1>
 
 @if ($errors->any())
-    <div class="bg-red-100 text-red-700 p-3 mb-3 rounded">
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
+    <div class="bg-red-100 border border-red-400 text-red-700 p-4 mb-4 rounded">
+        <p class="font-bold mb-2">Terjadi kesalahan:</p>
+        <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if ($message = Session::get('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 p-4 mb-4 rounded">
+        <p class="font-bold">Error:</p>
+        <p>{{ $message }}</p>
     </div>
 @endif
 

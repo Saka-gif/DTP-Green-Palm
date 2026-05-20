@@ -24,7 +24,7 @@
     <div class="bg-white p-4 rounded-xl shadow">
 
         @if($r->foto)
-            <img src="{{ asset('images/'.$r->foto) }}" 
+            <img src="{{ $r->foto_url }}" 
                  class="w-full h-40 object-cover rounded">
         @endif
 

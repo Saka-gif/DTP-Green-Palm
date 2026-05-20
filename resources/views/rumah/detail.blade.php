@@ -10,7 +10,7 @@
 
     <!-- FOTO -->
     @if($rumah->foto)
-        <img src="{{ asset('images/'.$rumah->foto) }}" 
+        <img src="{{ $rumah->foto_url }}" 
              class="w-full h-96 object-cover rounded mb-6">
     @endif
 

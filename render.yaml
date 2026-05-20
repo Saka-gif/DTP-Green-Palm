@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: green-palm
+    runtime: docker
+    region: singapore
+    plan: free
+    
+    # Environment variables yang diperlukan
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        sync: false
+      
+      # Cloudinary (ganti dengan nilai Anda)
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: CLOUDINARY_KEY
+        sync: false
+      - key: CLOUDINARY_SECRET
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_UPLOAD_PRESET
+        sync: false
+      
+      # Database (gunakan Render Postgres)
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_PORT
+        value: "5432"
+      
+      # Session & Cache
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_DRIVER
+        value: array
+      - key: QUEUE_CONNECTION
+        value: sync
+
+  # Database PostgreSQL (opsional)
+  - type: pserv
+    name: green-palm-db
+    runtime: postgresql
+    region: singapore
+    plan: free
+    ipAllowList: []
