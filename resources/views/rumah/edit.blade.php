@@ -73,8 +73,10 @@
     <input type="text" name="lokasi" value="{{ $rumah->lokasi }}"placeholder="Lokasi Rumah"
         class="w-full border p-2 mb-3 rounded">
 
-    <input type="text" name="status" value="{{ $rumah->status }}" placeholder="Status Rumah (Tersedia/Sold Out)"
-        class="w-full border p-2 mb-3 rounded">
+    <select name="status" class="w-full border p-2 mb-3 rounded">
+        <option value="Tersedia" {{ strtolower(trim((string) $rumah->status)) === 'tersedia' ? 'selected' : '' }}>Tersedia</option>
+        <option value="Sold" {{ strtolower(trim((string) $rumah->status)) === 'sold' ? 'selected' : '' }}>Sold</option>
+</select>
 
     <textarea name="deskripsi" class="w-full border p-2 mb-3 rounded" placeholder="Deskripsi Rumah">
     {{ $rumah->deskripsi }}

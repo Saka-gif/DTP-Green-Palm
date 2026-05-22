@@ -41,6 +41,18 @@ public function getDenahUrlAttribute(): ?string
     return $this->resolveMediaUrl($this->denah);
 }
 
+public function isTersedia(): bool
+{
+    return strtolower(trim((string) $this->status)) === 'tersedia';
+}
+
+public function getStatusLabelAttribute(): string
+{
+    $status = trim((string) $this->status);
+
+    return $status !== '' ? $status : '-';
+}
+
 private function resolveMediaUrl(?string $value): ?string
 {
     if (! $value) {

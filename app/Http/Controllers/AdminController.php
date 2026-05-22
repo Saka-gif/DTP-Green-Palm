@@ -13,11 +13,13 @@ class AdminController extends Controller
         $rumah = Rumah::with('tipe')->orderBy('created_at', 'desc')->get();
         $tipeRumah = TipeRumah::orderBy('created_at', 'desc')->get();
 
+        $tersedia = $rumah->filter(fn (Rumah $item) => $item->isTersedia())->count();
+
         $stats = [
             'totalRumah' => $rumah->count(),
             'totalTipe' => $tipeRumah->count(),
-            'tersedia' => $rumah->where('status', 'Tersedia')->count(),
-            'lainnya' => $rumah->where('status', '!=', 'Tersedia')->count(),
+            'tersedia' => $tersedia,
+            'lainnya' => $rumah->count() - $tersedia,
         ];
 
         return view('admin.dashboard', compact('rumah', 'tipeRumah', 'stats'));

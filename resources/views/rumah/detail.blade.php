@@ -27,8 +27,8 @@
     <!-- STATUS -->
     <p class="mb-4">
         <span class="px-3 py-1 rounded 
-        {{ $rumah->status == 'Tersedia' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">
-            {{ $rumah->status }}
+        {{ $rumah->isTersedia() ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">
+            {{ $rumah->status_label }}
         </span>
     </p>
 
@@ -38,7 +38,7 @@
     </p>
 
     <!-- WHATSAPP -->
-    @if($rumah->status == 'Tersedia')
+    @if($rumah->isTersedia())
     <a href="https://wa.me/6281234567890?text=Saya tertarik dengan rumah {{ $rumah->nama_rumah }}"
        target="_blank"
        class="bg-green-600 text-white px-6 py-3 rounded-lg">

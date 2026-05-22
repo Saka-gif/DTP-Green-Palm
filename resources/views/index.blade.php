@@ -33,6 +33,12 @@
         color: var(--ink);
         background: var(--surface);
         scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      img,
+      iframe {
+        max-width: 100%;
       }
 
       a {
@@ -410,6 +416,10 @@
       }
 
       .card img {
+        display: block;
+      }
+
+      .card img {
         width: 100%;
         height: 260px;
         object-fit: cover;
@@ -544,6 +554,7 @@
 
       .location-item-main {
         flex: 1;
+        min-width: 0;
       }
 
       .location-item-main h5 {
@@ -708,6 +719,10 @@
       }
 
       @media (max-width: 1080px) {
+        .hero-content {
+          max-width: 560px;
+        }
+
         .feature-grid,
         .facility-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -723,12 +738,28 @@
       }
 
       @media (max-width: 860px) {
+        .header-inner {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .brand {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .header-actions {
+          width: 100%;
+          justify-content: center;
+        }
+
         .site-nav {
           display: none;
         }
 
         .hero-content {
           padding-top: 120px;
+          max-width: 100%;
         }
 
         .footer-grid {
@@ -738,7 +769,7 @@
 
       @media (max-width: 680px) {
         .container {
-          padding: 0 18px;
+          padding: 0 16px;
         }
 
         .site-header {
@@ -749,7 +780,17 @@
 
         .header-inner {
           margin: 0;
-          padding: 12px 14px;
+          padding: 12px 12px;
+          gap: 10px;
+        }
+
+        .brand {
+          justify-content: flex-start;
+          gap: 10px;
+        }
+
+        .brand > div {
+          min-width: 0;
         }
 
         .brand img {
@@ -763,6 +804,7 @@
 
         .header-actions {
           gap: 8px;
+          justify-content: flex-start;
         }
 
         .cta-apply {
@@ -772,11 +814,86 @@
 
         .hero {
           min-height: 92vh;
+          background-position: center top;
+        }
+
+        .hero-content {
+          padding-top: 108px;
+          padding-bottom: 56px;
+        }
+
+        .hero h1 {
+          font-size: clamp(2rem, 9vw, 2.8rem);
+        }
+
+        .hero .lead {
+          max-width: 100%;
+          font-size: 0.98rem;
+        }
+
+        .hero-ctas {
+          flex-direction: column;
+        }
+
+        .hero-ctas .btn {
+          width: 100%;
+        }
+
+        .scroll-hint {
+          bottom: 16px;
         }
 
         .feature-grid,
         .facility-grid {
           grid-template-columns: 1fr;
+        }
+
+        .card img {
+          height: 220px;
+        }
+
+        .location-item {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .location-item-icon {
+          width: 44px;
+          min-width: 44px;
+          height: 44px;
+          font-size: 22px;
+        }
+
+        .distance-pill {
+          align-self: flex-start;
+          white-space: normal;
+        }
+
+        .location-map {
+          padding: 20px;
+        }
+
+        .location-map iframe {
+          width: 100%;
+          height: 280px;
+        }
+
+        #promo .promo,
+        #contact .contact-cta {
+          align-items: stretch;
+        }
+
+        .callout-btn {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .footer-grid {
+          gap: 24px;
+        }
+
+        .socials {
+          flex-wrap: wrap;
         }
 
         .section-title-wrap {
@@ -917,8 +1034,8 @@
                   @endif
                 </p>
 
-                <span style="display:inline-block;margin-top:6px;padding:4px 10px;border-radius:999px;font-size:12px;color:white;background: {{ $r->status == 'Tersedia' ? '#22c55e' : '#ef4444' }};">
-                  {{ $r->status }}
+                <span style="display:inline-block;margin-top:6px;padding:4px 10px;border-radius:999px;font-size:12px;color:white;background: {{ $r->isTersedia() ? '#22c55e' : '#ef4444' }};">
+                  {{ $r->status_label }}
                 </span>
 
                 <div style="margin-top:10px;">

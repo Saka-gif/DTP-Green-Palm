@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Log;
 
 class RumahController extends Controller
 {
+
+    public function home()
+{
+    $rumah = Rumah::all();
+    return view('index', compact('rumah'));
+}
     public function index()
     {
         $data = Rumah::all();
@@ -30,45 +36,42 @@ class RumahController extends Controller
             'lokasi' => 'required',
             'status' => 'required',
             'tipe_id' => 'required|exists:tipe_rumah,id',
-            'deskripsi' => 'nullable',
-            'luas_tanah' => 'nullable',
-            'luas_bangunan' => 'nullable',
-            'kamar_tidur' => 'nullable|numeric',
-            'kamar_mandi' => 'nullable|numeric',
-            'lantai' => 'nullable|numeric',
-            'carport' => 'nullable|numeric',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'denah' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'foto' => 'nullable|image|max:2048',
+            'denah' => 'nullable|image|max:2048'
         ]);
 
         try {
             $data = $request->except('foto', 'denah');
 
             if ($request->hasFile('foto')) {
-                $uploadedFoto = $this->uploadImageToCloudinary($request->file('foto'), 'green-palm/rumah');
-                $data['foto'] = $uploadedFoto['url'];
-                $data['foto_public_id'] = $uploadedFoto['public_id'];
+                $upload = $this->uploadImage($request->file('foto'));
+
+                if ($upload === null) {
+                    throw new \RuntimeException('Upload foto ke Cloudinary gagal. Periksa CLOUDINARY_URL dan log aplikasi.');
+                }
+
+                $data['foto'] = $upload['url'];
+                $data['foto_public_id'] = $upload['public_id'];
             }
 
             if ($request->hasFile('denah')) {
-                $uploadedDenah = $this->uploadImageToCloudinary($request->file('denah'), 'green-palm/rumah');
-                $data['denah'] = $uploadedDenah['url'];
-                $data['denah_public_id'] = $uploadedDenah['public_id'];
+                $upload = $this->uploadImage($request->file('denah'));
+
+                if ($upload === null) {
+                    throw new \RuntimeException('Upload denah ke Cloudinary gagal. Periksa CLOUDINARY_URL dan log aplikasi.');
+                }
+
+                $data['denah'] = $upload['url'];
+                $data['denah_public_id'] = $upload['public_id'];
             }
 
             Rumah::create($data);
 
             return redirect()->route('admin.dashboard')
-                ->with('success', 'Data rumah berhasil ditambahkan');
-        } catch (\Exception $e) {
-            Log::error('Error in RumahController@store', [
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
+                ->with('success', 'Data berhasil ditambahkan');
 
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['upload_error' => 'Gagal upload gambar ke Cloudinary: ' . $e->getMessage()]);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -82,144 +85,134 @@ class RumahController extends Controller
     public function update(Request $request, $id)
     {
         $rumah = Rumah::findOrFail($id);
+
         $request->validate([
             'nama_rumah' => 'required',
             'harga' => 'required|numeric',
             'lokasi' => 'required',
             'status' => 'required',
             'tipe_id' => 'required|exists:tipe_rumah,id',
-
-            'deskripsi' => 'nullable',
-            'luas_tanah' => 'nullable',
-            'luas_bangunan' => 'nullable',
-            'kamar_tidur' => 'nullable|numeric',
-            'kamar_mandi' => 'nullable|numeric',
-            'lantai' => 'nullable|numeric',
-            'carport' => 'nullable|numeric',
-
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'denah' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'foto' => 'nullable|image|max:2048',
+            'denah' => 'nullable|image|max:2048'
         ]);
 
         try {
             $data = $request->except('foto', 'denah');
 
             if ($request->hasFile('foto')) {
-                $uploadedFoto = $this->uploadImageToCloudinary($request->file('foto'), 'green-palm/rumah');
-                $this->deleteImageAsset($rumah->foto, $rumah->foto_public_id);
-                $data['foto'] = $uploadedFoto['url'];
-                $data['foto_public_id'] = $uploadedFoto['public_id'];
+                $upload = $this->uploadImage($request->file('foto'));
+
+                if ($upload === null) {
+                    throw new \RuntimeException('Upload foto ke Cloudinary gagal. Periksa CLOUDINARY_URL dan log aplikasi.');
+                }
+
+                $this->deleteImage($rumah->foto_public_id);
+                $data['foto'] = $upload['url'];
+                $data['foto_public_id'] = $upload['public_id'];
             }
 
             if ($request->hasFile('denah')) {
-                $uploadedDenah = $this->uploadImageToCloudinary($request->file('denah'), 'green-palm/rumah');
-                $this->deleteImageAsset($rumah->denah, $rumah->denah_public_id);
-                $data['denah'] = $uploadedDenah['url'];
-                $data['denah_public_id'] = $uploadedDenah['public_id'];
+                $upload = $this->uploadImage($request->file('denah'));
+
+                if ($upload === null) {
+                    throw new \RuntimeException('Upload denah ke Cloudinary gagal. Periksa CLOUDINARY_URL dan log aplikasi.');
+                }
+
+                $this->deleteImage($rumah->denah_public_id);
+                $data['denah'] = $upload['url'];
+                $data['denah_public_id'] = $upload['public_id'];
             }
 
             $rumah->update($data);
 
             return redirect()->route('admin.dashboard')
-                ->with('success', 'Data rumah berhasil diupdate');
-        } catch (\Exception $e) {
-            Log::error('Error in RumahController@update', [
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-            ]);
+                ->with('success', 'Data berhasil diupdate');
 
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['upload_error' => 'Gagal upload gambar ke Cloudinary: ' . $e->getMessage()]);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-    public function destroy($id)
+    private function uploadImage($file): ?array
+    {
+        try {
+            $response = Cloudinary::uploadApi()->upload($file->getRealPath(), [
+                'folder' => 'rumah',
+                'resource_type' => 'image',
+            ]);
+
+            if (! is_array($response) && ! $response instanceof \ArrayAccess) {
+                Log::error('Cloudinary upload returned invalid response', [
+                    'response_type' => gettype($response),
+                ]);
+
+                return null;
+            }
+
+            $responseData = $response instanceof \ArrayAccess
+                ? $response->getArrayCopy()
+                : $response;
+
+            if (empty($responseData['secure_url']) || empty($responseData['public_id'])) {
+                Log::error('Cloudinary upload missing expected keys', [
+                    'response' => $responseData,
+                ]);
+
+                return null;
+            }
+
+            return [
+                'url' => $responseData['secure_url'],
+                'public_id' => $responseData['public_id'],
+            ];
+        } catch (\Exception $e) {
+            Log::error('Cloudinary upload error', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return null;
+        }
+    }
+
+     public function destroy($id)
     {
         $rumah = Rumah::findOrFail($id);
 
-        $this->deleteImageAsset($rumah->foto, $rumah->foto_public_id);
-        $this->deleteImageAsset($rumah->denah, $rumah->denah_public_id);
+        try {
+            $this->deleteImage($rumah->foto_public_id);
+            $this->deleteImage($rumah->denah_public_id);
+            $rumah->delete();
 
-        $rumah->delete();
+            return redirect()->route('admin.dashboard')
+                ->with('success', 'Data berhasil dihapus');
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Data rumah berhasil dihapus');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    public function show($id)
+     public function show($id)
     {
         $rumah = Rumah::findOrFail($id);
-        return view('rumah.detail', compact('rumah'));
+        return view('rumah.show', compact('rumah'));
     }
 
-    // ================= USER =================
-
-    public function home()
+    private function deleteImage($publicId)
     {
-        $rumah = Rumah::all();
-        return view('index', compact('rumah'));
+        if ($publicId) {
+            try {
+                Cloudinary::uploadApi()->destroy($publicId);
+            } catch (\Exception $e) {
+                Log::error('Delete error', [
+                    'error' => $e->getMessage()
+                ]);
+            }
+        }
     }
 
     public function detailUser($id)
     {
         $rumah = Rumah::findOrFail($id);
         return view('detail', compact('rumah'));
-    }
-
-    private function uploadImageToCloudinary($file, string $folder): array
-    {
-        try {
-            Log::info('Starting Cloudinary upload', [
-                'filename' => $file->getClientOriginalName(),
-                'size' => $file->getSize(),
-                'folder' => $folder
-            ]);
-
-            $uploaded = Cloudinary::uploadApi()->upload($file->getRealPath(), [
-                'folder' => $folder,
-                'resource_type' => 'auto',
-            ]);
-
-            Log::info('Cloudinary upload successful', [
-                'public_id' => $uploaded['public_id'] ?? null,
-                'secure_url' => $uploaded['secure_url'] ?? null,
-            ]);
-
-            if (!isset($uploaded['public_id']) || !isset($uploaded['secure_url'])) {
-                Log::error('Cloudinary response missing required fields', $uploaded);
-                throw new \Exception('Upload response tidak lengkap dari Cloudinary');
-            }
-
-            return [
-                'url' => $uploaded['secure_url'],
-                'public_id' => $uploaded['public_id'],
-            ];
-        } catch (\Exception $e) {
-            Log::error('Cloudinary upload failed', [
-                'error' => $e->getMessage(),
-                'file' => $file->getClientOriginalName(),
-            ]);
-            throw $e;
-        }
-    }
-
-    private function deleteImageAsset(?string $url, ?string $publicId): void
-    {
-        if ($publicId) {
-            try {
-                Cloudinary::uploadApi()->destroy($publicId, ['invalidate' => true]);
-                return;
-            } catch (\Throwable $exception) {
-            }
-        }
-
-        if ($url && ! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://')) {
-            $localPath = public_path('images/' . $url);
-
-            if (file_exists($localPath)) {
-                unlink($localPath);
-            }
-        }
     }
 }

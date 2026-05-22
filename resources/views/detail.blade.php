@@ -10,7 +10,7 @@
     @php
         $fotoRumah = $rumah->foto_url ?: asset('gambar/home_page_green_palm.jpeg');
         $denahRumah = $rumah->denah_url ?: $fotoRumah;
-        $statusClass = strtolower((string) $rumah->status) === 'tersedia' ? 'available' : 'unavailable';
+        $statusClass = $rumah->isTersedia() ? 'available' : 'unavailable';
         $profileKey = strtolower(trim(($rumah->tipe->nama_tipe ?? '') . ' ' . ($rumah->nama_rumah ?? '')));
 
         $presetSpesifikasi = [

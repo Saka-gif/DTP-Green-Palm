@@ -89,9 +89,9 @@
                             <td class="px-6 py-4 font-medium text-slate-600">{{ $item->tipe->nama_tipe ?? '-' }}</td>
                             <td class="px-6 py-4 font-bold text-slate-900">Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
                             <td class="px-6 py-4">
-                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold {{ strtolower($item->status) === 'tersedia' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }}">
-                                    <span class="mr-1.5 h-1.5 w-1.5 rounded-full {{ strtolower($item->status) === 'tersedia' ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
-                                    {{ ucfirst($item->status) }}
+                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold {{ $item->isTersedia() ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }}">
+                                    <span class="mr-1.5 h-1.5 w-1.5 rounded-full {{ $item->isTersedia() ? 'bg-emerald-500' : 'bg-rose-500' }}"></span>
+                                    {{ $item->status_label }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-right">
