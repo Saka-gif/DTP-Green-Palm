@@ -63,7 +63,13 @@ private function resolveMediaUrl(?string $value): ?string
         return $value;
     }
 
-    return asset('images/' . $value);
+    $normalized = ltrim($value, '/');
+
+    if (str_starts_with($normalized, 'images/')) {
+        return asset($normalized);
+    }
+
+    return asset('images/' . $normalized);
 }
 
 

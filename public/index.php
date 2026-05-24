@@ -17,4 +17,10 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+// Jika file ini dipindah ke public_html di hosting, override public path
+// agar public_path() tetap mengarah ke folder yang benar.
+$app->bind('path.public', function () {
+    return __DIR__;
+});
+
 $app->handleRequest(Request::capture());
